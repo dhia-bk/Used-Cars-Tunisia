@@ -112,6 +112,7 @@ def understand_the_market():
     # Add markers for each country with the count and percentage of cars as pop-up
     marker_cluster = MarkerCluster().add_to(m)
     for country, data in country_data.items():
+        count = country_counts.get(country, 0)
         percentage = (count / total_cars) * 100
         flag_url = data['flag_url']
         popup_text = (
