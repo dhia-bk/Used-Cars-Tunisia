@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, jsonify
 
 import plotly.graph_objs as go
 import plotly.io as pio
+import plotly.express as px
 
 import pickle
 
@@ -85,8 +86,74 @@ def understand_the_market():
         title_x=0.5,
     )
     cars_man_json = cars_man.to_json()
+    
+    df['Posting Date'] = pd.to_datetime(df['Posting Month'] + ' ' + df['Posting Year'].astype(int).astype(str), format='%B %Y')
+    
+    # Group the data by 'Posting Date' and calculate the median and mean price separately
+    grouped_data = df.groupby('Posting Date')['Price'].agg(['median', 'mean']).reset_index()
+    
+    # Melt the DataFrame to have 'Price Type' as a column
+    melted_data = pd.melt(grouped_data, id_vars=['Posting Date'], var_name='Price Type', value_name='Price')
+    
+    # Create an interactive line plot
+    fig = px.line(melted_data, x='Posting Date', y='Price', color='Price Type',
+                  title='Median and Mean Price over Posting Date',
+                  labels={'Posting Date': 'Date', 'Price': 'Price'},
+                  hover_data={'Price': ':.2f TND'},
+                  line_shape='spline',
+                  )
+    
+    # Update layout
+    fig.update_layout(
+        xaxis_title='Posting Date',
+        yaxis_title='Price',
+        hovermode='x',
+        template='plotly_white',
+        title_font_size=24,
+        title_x=0.5,  # Title centered
+    )
+    
+    # Update legend title
+    fig.update_layout(legend_title_text='Price Type')
+    price_dis_json = fig.to_json()
 
-    return render_template('Understand the Market.html', cars_man_json=cars_man_json)
+    inflation_data = {
+        'Posting Date': pd.to_datetime(['Nov-2022', 'Dec-2022', 'Jan-2023', 'Feb-2023', 'Mar-2023', 'Apr-2023', 'May-2023',
+                                        'Jun-2023', 'Jul-2023', 'Aug-2023', 'Sep-2023', 'Oct-2023', 'Nov-2023', 'Dec-2023',
+                                        'Jan-2024', 'Feb-2024', 'Mar-2024'], format='%b-%Y'),
+        'Inflation Rate': [9.8, 10.1, 10.2, 10.4, 10.3, 10.1, 9.6, 9.4, 9.1, 9.2, 8.9, 8.7,
+                           8.2, 8.1, 7.8, 7.5, 7.5]
+    }
+    inflation_df = pd.DataFrame(inflation_data)
+    
+    # Calculate percent change in median and mean prices
+    median_percent_change = grouped_data['median'].pct_change() * 100
+    mean_percent_change = grouped_data['mean'].pct_change() * 100
+    
+    # Create a line plot for percent change in median and mean prices
+    fig = go.Figure()
+    
+    fig.add_trace(go.Scatter(x=grouped_data['Posting Date'], y=median_percent_change,
+                             mode='lines+markers', name='Median Price Change'))
+    fig.add_trace(go.Scatter(x=grouped_data['Posting Date'], y=mean_percent_change,
+                             mode='lines+markers', name='Mean Price Change'))
+    
+    # Add inflation rate to the plot
+    fig.add_trace(go.Scatter(x=inflation_df['Posting Date'], y=inflation_df['Inflation Rate'],
+                             mode='lines', name='Inflation Rate', line=dict(color='black', dash='dash')))
+    
+    # Update layout
+    fig.update_layout(
+        title='Percent Change in Median and Mean Prices vs. Inflation Rate',
+        xaxis_title='Posting Date',
+        yaxis_title='Percent Change / Inflation Rate (%)',
+        template='plotly_white',
+        legend=dict(x=0.02, y=0.95),  n
+         
+    )
+
+    price_inf_json = fig.to_json()
+    return render_template('Understand the Market.html', cars_man_json=cars_man_json, price_dis_json=price_dis_json, price_inf_json=price_inf_json)
 
 @app.route("/graphs/cars_by_country_map", methods=['GET'])
 def cars_by_country_map():
