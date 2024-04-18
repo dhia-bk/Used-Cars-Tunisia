@@ -1,0 +1,334 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Used Car Market in Tunisia</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+    /* Reset CSS */
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #293742;
+    }
+
+    /* Navbar Styles */
+    .navbar {
+    background-color: #293742;
+    padding: 20px;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    }
+
+    .navbar ul {
+    list-style: none;
+    }
+
+    .navbar li {
+    display: inline-block;
+    margin: 0 10px;
+    }
+
+    .navbar a {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 18px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .navbar a:hover {
+    background-color: #1da1f2;
+    color: #ffffff;
+    }
+
+    /* Hero Section Styles */
+    .hero {
+    background-color: #15202b;
+    color: #ffffff;
+    padding: 100px 20px;
+    text-align: center;
+    position: relative;
+    margin-top: 20px;
+    }
+
+    .hero h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .hero p {
+    font-size: 20px;
+    margin-bottom: 20px;
+    }
+
+
+
+    /* Why Us Section Styles */
+    .why-us {
+    background-color: #f5f5f5; /* Light grey background color */
+    color: #15202b;
+    padding: 190px 20px;
+    text-align: center;
+    position: relative; /* Needed for positioning the background image and gradient */
+    overflow: hidden; /* Ensure the background image doesn't overflow */
+    margin-top: 20px; /* Increase margin for better separation */
+    }
+
+    .why-us::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: linear-gradient(to right, #f5f5f5, rgba(245, 245, 245, 0)); /* Linear gradient fading to the right */
+    z-index: 1; /* Ensure the gradient is below the text */
+    }
+
+    .why-us .background-image {
+    position: absolute;
+    top: 0;
+    left: 0; /* Adjusted to start from the left */
+    bottom: 0;
+    width: 100%; /* Adjust the width of the background image to cover the entire section */
+    height: 100%; /* Ensure the background image covers the entire section */
+    object-fit: cover; /* Maintain aspect ratio while covering the entire section */
+    opacity: 0.5; /* Adjust the opacity of the image as needed */
+    z-index: 0; /* Ensure the image is below the text and gradient */
+    }
+
+    .why-us .container {
+    position: relative; 
+    z-index: 2; 
+    }
+
+    .why-us h2 {
+        margin-bottom: 40px; /* Increased margin-bottom to add more space */
+    }
+
+    /* Service Section Styles */
+    .services {
+    padding: 100px 20px; /* Increased padding for better separation */
+    background-color: #ffffff; /* White background color */
+    }
+
+    .services-title {
+        text-align: center;
+        color: #0c253e; /* Changed title color to something darker */
+        margin-bottom: 90px; /* Increased margin for better separation */
+    }
+
+    .service {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px; /* Increased margin for better separation */
+    }
+
+    .service-content {
+        flex: 1;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #f9f9f9;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        display: flex; /* Added to align content in flex direction */
+    }
+
+    .service-image {
+        flex: 1; /* Added to control image size */
+        text-align: center;
+    }
+
+    .service-text {
+        flex: 1; /* Added to control text size */
+        padding-left: 20px; /* Added padding to separate image and text */
+    }
+
+    .service img {
+        width: 100%;
+        max-width: 400px;
+        height: auto; /* Maintain aspect ratio */
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .service:hover img {
+        transform: scale(1.05);
+    }
+
+    .service-content h3 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #15202b;
+    }
+
+    .service-content p {
+        font-size: 18px;
+        color: #4f4f4f;
+    }
+
+
+
+    /* Button Styles */
+    .button {
+    display: inline-block;
+    background-color: #1da1f2;
+    color: #ffffff;
+    padding: 12px 24px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+    cursor: pointer; /* Add cursor pointer for better usability */
+    }
+
+
+
+
+    .button:hover {
+    background-color: #0d8bf2;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+
+
+    /* Our Process Section Styles */
+    .process {
+    padding: 100px 20px;
+    text-align: center;
+    background-color: #f5f5f5;
+    }
+
+    .process h2 {
+    font-size: 36px;
+    margin-bottom: 40px;
+    color: #15202b;
+    }
+
+    .sources {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px; /* Added gap between source items */
+    }
+
+    .source img {
+    width: 150px; /* Set a fixed width for all images */
+    height: 100px; /* Set a fixed height for all images */
+    margin: 0 auto; /* Center image horizontally */
+    }
+
+    .source p {
+    margin-top: 10px; /* Added margin between image and text */
+    }
+
+
+
+
+    
+    </style>
+    </head>
+    <body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="/Understand the Market">Understand the Market</a></li>
+        <li><a href="/prediction">Predict Price</a></li>
+    </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+        <h1>Welcome to the Used Car Market in Tunisia</h1>
+        <p>Empowering you with data-driven insights for informed car purchasing decisions.</p>
+        <button class="button" id="discover-services" type="button">Discover Our Services</button>
+    </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="why-us">
+        <img class="background-image" src="https://i0.wp.com/bestsellingcarsblog.com/wp-content/uploads/2014/08/6.-Peugeot-203-Djerba-July-2014.jpg" alt="Background Image">
+        <div class="container">
+        <h2>Why Choose Us?</h2>
+        <p>From comprehensive market analysis to accurate price estimation, we guide you through every step of your automotive project. Our mission is to save you time and money by providing expert insights and personalized assistance tailored to your needs.</p>
+        </div>
+    </section>
+    
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="services-title">Our Services</h2>
+
+            <div class="service">
+                <div class="service-content">
+                    <div class="service-image">
+                        <a href="/Understand the Market"><img src="https://www.cubictelecom.com/wordpress/wp-content/uploads/2021/07/connected-car-data-shutterstock_1487608502.png" alt="Image 1"></a>
+                    </div>
+                    <div class="service-text">
+                        <h3>Market Trends Analysis</h3>
+                        <p>Dive deep into the Tunisian used car market with our visually captivating graphs. Explore pricing trends, model popularity, and regional variations in an intuitive and user-friendly interface, enabling you to make informed decisions with ease.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service">
+                <div class="service-content reverse">
+                    <div class="service-text">
+                        <h3>Price Prediction</h3>
+                        <p>Access precise price estimates for used cars with our sophisticated prediction tool. By inputting key details, our algorithm analyzes market data to deliver dependable valuations, facilitating a seamless buying or selling experience.</p>
+                    </div>
+                    <div class="service-image">
+                        <a href="/prediction"><img src="https://www.lll.tum.de/wp-content/uploads/2023/04/ai-data-science-machine-learning-visual.jpg" alt="Image 2"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Process Section -->
+    <section id="process" class="process">
+        <div class="container">
+            <h2>Our Sources</h2>
+            <div class="sources">
+                <div class="source">
+                    <a href="https://tayara.tn" target="_blank"><img src="https://cdn.jsdelivr.net/gh/edwm101/cdn@master/dist/img/tayara.33be737.jpg" alt="Tayara Logo"></a>
+                </div>
+                <div class="source">
+                    <a href="https://cava.tn" target="_blank"><img src="https://cdn.jsdelivr.net/gh/edwm101/cdn@master/dist/img/cava.27fa637.png" alt="Cava Logo"></a>
+                </div>
+                <div class="source">
+                    <a href="https://automobile.tn" target="_blank"><img src="https://cdn.jsdelivr.net/gh/edwm101/cdn@master/dist/img/automobile.99039ea.png" alt="Automobile Logo"></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+    <script>
+        document.getElementById('discover-services').addEventListener('click', function() {
+        var servicesSection = document.getElementById('services');
+        if (servicesSection) {
+            servicesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        });
+        </script>
+       
+    </body>
+    </html>

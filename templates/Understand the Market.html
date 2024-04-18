@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Understand the Market</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff; /* Set body background to white */
+}
+
+/* Navbar Styles */
+.navbar {
+    background-color: #293742;
+    color: #ffffff;
+    padding: 20px;
+    text-align: center;
+}
+
+.navbar ul {
+    list-style: none;
+}
+
+.navbar li {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 18px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar a:hover {
+    background-color: #1da1f2;
+}
+
+
+
+
+.welcome-message {
+    background-image: url('https://r4.wallpaperflare.com/wallpaper/616/403/742/mercedes-benz-amg-gt-s-2016-wallpaper-20094ef34b418dfa60a0479e98142bcd.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 5px;
+    text-align: center;
+    height: 600px;
+    color: white; /* Dark text color */
+    font-family: 'Courier New', Courier, monospace; /* Mysterious font */
+    font-size: 18px; /* Larger font size */
+    position: relative;
+    height : 750px;
+}
+
+.content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.buttons {
+    position: absolute;
+    bottom: 5px; /* Adjusted position */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+.explore-btn,
+.brand-btn {
+    background-color: #222; /* Dark button background */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.explore-btn:hover,
+.brand-btn:hover {
+    background-color: #444; /* Darker button background on hover */
+}
+
+
+
+.graph-container {
+    width: 800px; /* Set width to 600px */
+    height: 600px; /* Set height to 400px */
+    background-color: #ffffff; /* White background */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px; /* Add padding */
+    margin-right: 20px; /* Add margin to create space between graph-container and map-container */
+    position: relative; /* Position relative for absolute positioning */
+    left : 100;
+}
+
+.graph-container iframe {
+    position: absolute; /* Position absolute to cover entire container */
+    top: 0; /* Position iframe at the top of the container */
+    left: 0; /* Position iframe at the left of the container */
+    width: 100%; /* Make iframe width 100% of its container */
+    height: 100%; /* Make iframe height 100% of its container */
+}
+
+.map-container {
+    background-color: #f0f0f0; /* Light grey background */
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px; /* Increased border-radius for rounded corners */
+    height: 650px; /* Adjust the height as needed */
+    display: flex;
+    flex-direction: row; /* Align items horizontally */
+    justify-content: space-between; /* Space items evenly */
+    align-items: center; /* Center items vertically */
+}
+
+
+.map-container .text {
+    font-family: 'Roboto', sans-serif;
+    flex: 1; /* Allow the text to grow and fill the available space */
+    padding: 20px; /* Add padding to create space around the text */
+    display: fle
+    margin-bottom: 20px;x; /* Use flexbox for centering */
+    flex-direction: column; /* Arrange items vertically */
+    justify-content: center; /* Center items vertically */
+    align-items: center; /* Center items horizontally */
+    text-align: center; /* Center text within the container */
+}
+
+.map-container .text h1 {
+    font-size: 24px; /* Increase the font size for the heading */
+    margin-bottom: 20px; /* Add some space below the heading */
+    color: #293742; /* Set a dark color for the heading */
+    justify-content: center; /* Center items vertically */
+    align-items: left; /* Center items horizontally */
+    text-align: left;
+}
+
+.map-container .text p {
+    font-size: 16px; /* Set a comfortable font size for paragraphs */
+    line-height: 1.5; /* Improve readability with increased line height */
+    color: #556e7b; /* Set a slightly darker color for paragraphs */
+    align-items: left; /* Center items horizontally */
+    text-align: left;
+    margin-bottom: 100px;
+}
+
+.continent-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 100px;
+}
+
+.continent-table th,
+.continent-table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.continent-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    text-align: left;
+}
+
+.continent-table td {
+    text-align: left;
+}
+
+.continent-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.continent-table tr:hover {
+    background-color: #f2f2f2;
+}
+
+
+/* Footer Styles */
+.footer {
+background-color: #293742;
+color: #ffffff;
+padding: 20px;
+text-align: center;
+position: fixed;
+width: 100%;
+bottom: 0;
+z-index: 1000;
+}
+.graph1-container {
+    background-color: #f0f0f0;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+    height: 650px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.graph11-container {
+    width: 800px;
+    height: 600px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    position: relative;
+}
+
+.graph11-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.graph1-container .text {
+    font-family: 'Roboto', sans-serif;
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.graph1-container .text h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #293742;
+    text-align: left;
+    margin-bottom: 100px;
+}
+
+.graph1-container .text p {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #556e7b;
+    text-align: left;
+    margin-bottom: 50px;
+}
+
+.price-container {
+    background-color: #f0f0f0; /* Light grey background */
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px; /* Increased border-radius for rounded corners */
+    height: 650px; /* Adjust the height as needed */
+    display: flex;
+    flex-direction: column; /* Align items vertically */
+    justify-content: space-between; /* Space items evenly */
+    align-items: center; /* Center items horizontally */
+    height: 1000px;
+}
+
+.price_PD, .price_age {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 50%; 
+}
+
+.price_PD iframe, .price_age iframe {
+    border: none;
+    width: 50%; 
+    height: 400px;
+}
+
+.price_PD iframe {
+    margin-right: 4%; 
+}
+
+.price_age iframe {
+    border: none;
+    width: 46%; /* Set the width to 50% */
+    height: 400px;
+}
+.price_age p {
+    margin-left: 10px;
+    margin-bottom: 50px;
+    width: 48%; /* Adjusted width to leave space for margin */
+}
+
+.graph-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 80%;
+    height: 100%;
+}
+
+.price-mileage-container {
+    background-color: #f2f2f2; 
+    padding: 20px;
+    text-align: center; 
+}
+h1 {
+    margin-top: 0; 
+}
+.hello {
+    margin-top: 20px; 
+}
+iframe {
+    width: 100%;
+    height: 500px; 
+    border: 1px solid #ccc; 
+}
+
+.transmission-fuel-container {
+    background-color: #f2f2f2; /* Light grey background */
+    padding: 20px;
+    text-align: center; 
+    margin-top: 20px; /* Add some space above the container */
+}
+
+.transmission-fuel-container h1 {
+    margin-top: 0; /* Remove default margin for the heading */
+}
+
+.graph-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px; /* Add some space between rows */
+}
+
+.transmission-fuel-container iframe {
+    border: 1px solid #ccc;
+    width: 40%; /* Set the width to 40% to fit two iframes in a row */
+    height: 300px;
+}
+
+.explore-btn a,
+.brand-btn a {
+    text-decoration: none; /* Remove underline */
+    color: white; /* Ensure text color remains white */
+}
+
+.button_end {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.end_button {
+    background-color: #222; /* Dark button background */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.end_button:hover {
+    background-color: #444; /* Darker button background on hover */
+}
+
+.button_end{background-color: #293742;
+}
+
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/Understand the Market">Understand the Market</a></li>
+        <li><a href="/prediction">Predict Price</a></li>
+    </ul>
+</nav>
+
+<!-- Welcome Message -->
+<div class="welcome-message">
+    <p>Welcome to the Tunisian Used Car Market Analysis. Get ready to explore our marketplace! We've put together easy-to-understand graphs, charts, and maps to help you make smart choices.</p>
+    <p>Whether you're looking to buy the perfect car or sell yours at the right price, our insights are here to guide you. By the end, you'll have a clear picture of what's happening in the market, so you can make decisions with confidence.</p>
+    <button class="explore-btn">
+        <a href="#map-container">Explore the Tunisian Market</a>
+    </button>   
+     <button class="brand-btn"><a href="/dashboard">Figure Out More About a Specific Brand</a>
+     </button>
+ 
+</div>
+
+
+<!-- Map Container -->
+<div class="map-container" >
+    <section class="graph-container">
+        <iframe class="graph-iframe map" src="/graphs/cars_by_country_map"></iframe>
+    </section>
+    <div class="text">
+        <h1>Where do the Cars in the Tunisian Market come from?</h1>
+        <p id="map-container">Let's start by taking a look at the bigger picture and understanding where the cars come from in the Tunisian market. Here is a breakdown of the market share of every continent:</p>
+        <table class="continent-table" border = 1 >
+            <tr>
+                <th>Continent</th>
+                <th>Market Share (%)</th>
+            </tr>
+            <tr>
+                <td>Europe</td>
+                <td>70.83</td>
+            </tr>
+            <tr>
+                <td>Asia</td>
+                <td>23.21</td>
+            </tr>
+            <tr>
+                <td>North America</td>
+                <td>5.94</td>
+            </tr>
+            <tr>
+                <td>Africa</td>
+                <td>0.02</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div class="graph1-container" >
+    <div class="text">
+        <h1>Which brands are most frequently displayed for sale?</h1>
+        <p>These are the Top 5 Car Manufacturers and their Market Share:</p>
+
+        <table class="continent-table" border = 1>
+            <tr>
+              <th>Manufacturer</th>
+              <th>Market Share (%)</th>
+            </tr>
+            <tr>
+              <td>VOLKSWAGEN</td>
+              <td>15.28%</td>
+            </tr>
+            <tr>
+              <td>PEUGEOT</td>
+              <td>12.03%</td>
+            </tr>
+            <tr>
+              <td>RENAULT</td>
+              <td>9.18%</td>
+            </tr>
+            <tr>
+              <td>CITROEN</td>
+              <td>8.31%</td>
+            </tr>
+            <tr>
+              <td>KIA</td>
+              <td>6.58%</td>
+            </tr>
+          </table>
+          
+    </div>
+    <section class="graph11-container">
+        <iframe class="graph-iframe map" src="/graphs/cars_manufacturers"></iframe>
+    </section>
+</div>
+
+<div class="price-container">
+    <h1>How does the price change over time?</h1>
+    <div class="price_PD">
+        <iframe src="/graphs/price_PD" frameborder="1" width="50%" height="100%"></iframe>
+        <iframe src="/graphs/price_PD_inflation" frameborder="1" width="50%" height="100%"></iframe>
+    </div>
+    <div class="price_age">
+        <iframe src="/graphs/price_age" frameborder="1" width="50%" height="400px"></iframe>
+        <p>In the graph above, the mean and median prices fluctuate significantly while inflation remains constant. This could be due to shifts in consumer preferences, market conditions, supply and demand dynamics, or specific events affecting market segments. Mean price has risen by 7.31% since Nov 2022.
+            Median price has risen by 7.35% since Nov 2022. </p>
+    </div>
+</div>
+
+<!-- Map Container -->
+<div class="map-container">
+    <section class="graph-container">
+        <img src="https://lh3.googleusercontent.com/drive-viewer/AKGpiha3IXl_nPb4rSoV0iXjp5qEsdyr05EZ0KyG2J7N5ALvdpS98o8mJo_bZcYs16pjFWhyw-LggUZGRLyvKve8hAZOauieHb5pFS0=w973-h943" alt="Graph"> 
+    </section>
+    <div class="text">
+        <h1>What is the geographic distribution of used car listings across different governerates?</h1>
+        <p>Analyzing the distribution of used car listings across Tunisian governorates reveals that the market share matches the population share. Ben Arous and Tunis, as well as Sousse and Sfax, have a proportionate number of listings compared to their respective populations. This suggests that the demand for used cars correlates with population density across regions in Tunisia.</p>
+       
+    </div>
+</div>
+<div class="price-mileage-container">
+    <h1>What is the distribution of Price and Mileage?</h1>
+    <div class="hello">
+        <iframe src="/graphs/mileage_price distribution" frameborder="1" width="100%" height="100%"></iframe>
+    </div>
+</div>
+
+
+<div class="transmission-fuel-container">
+    <h1>Transmission and Fuel</h1>
+    <div class="graph-row">
+        <iframe src="/graphs/fig_transmission" frameborder="1" width="45%" height="400px"></iframe>
+        <iframe src="/graphs/fig_fuel" frameborder="1" width="45%" height="400px"></iframe>
+    </div>
+    <div class="graph-row">
+        <iframe src="/graphs/fig_avg_price_transmission" frameborder="1" width="45%" height="400px"></iframe>
+        <iframe src="/graphs/fig_avg_price_fuel" frameborder="1" width="45%" height="400px"></iframe>
+    </div>
+</div>
+<div class = "button_end">
+<button class="end_button">
+    <a href="/dashboard">Figure Out More About a Specific Brand</a>
+    </button>
+
+</div>
+</body>
+</html>

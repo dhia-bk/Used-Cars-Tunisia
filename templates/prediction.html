@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Car Price Prediction</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<style>
+    /* Reset CSS */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #ffffff; /* Set body background to white */
+    }
+    
+    /* Navbar Styles */
+    .navbar {
+        background-color: #293742;
+        color: #ffffff;
+        padding: 20px;
+        text-align: center;
+    }
+    
+    .navbar ul {
+        list-style: none;
+    }
+    
+    .navbar li {
+        display: inline-block;
+        margin: 0 10px;
+    }
+    
+    .navbar a {
+        text-decoration: none;
+        color: #ffffff;
+        font-size: 18px;
+        padding: 10px 20px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    
+    .navbar a:hover {
+        background-color: #1da1f2;
+    }
+    
+    /* Prediction Form Section */
+    .form-container {
+        width: 50%;
+        margin: 0 auto; /* Center the form horizontally */
+        padding: 20px;
+        background-color: #f4f4f4;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .form-group {
+        margin-bottom: 20px;
+    }
+    
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+    }
+    
+    .form-group select,
+    .form-group input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+    
+    .button {
+        background-color: #1da1f2;
+        color: #ffffff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    
+    .button:hover {
+        background-color: #0d8ae6;
+    }
+    
+    .results-container {
+        text-align: center; /* Center the result text */
+        margin-top: 20px;
+    }
+    
+
+    
+</style>
+</head>
+<body>
+
+
+
+<!-- Navbar -->
+<nav class="navbar" id="navbar">
+<ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/Understand the Market">Understand the Market</a></li>
+    <li><a href="/prediction">Predict Price</a></li>
+</ul>
+</nav>
+
+<!-- Prediction Form Section -->
+<div style = "display = flex;">
+
+<section class="form-container">
+ <div class="container">
+ <h2>Predict Car Price</h2>
+<form id="prediction-form",action = "/prediction", method = "post">
+    <div class="form-group">
+        <label for="manufacturer">Manufacturer:</label>
+        <select id="manufacturer" name="manufacturer">
+            <option value="HYUNDAI">HYUNDAI</option>
+            <option value="FIAT">FIAT</option>
+            <option value="MITSUBISHI">MITSUBISHI</option>
+            <option value="RENAULT">RENAULT</option>
+            <option value="VOLKSWAGEN">VOLKSWAGEN</option>
+            <option value="CITROEN">CITROEN</option>
+            <option value="BMW">BMW</option>
+            <option value="PEUGEOT">PEUGEOT</option>
+            <option value="AUDI">AUDI</option>
+            <option value="MERCEDES">MERCEDES</option>
+            <option value="NISSAN">NISSAN</option>
+            <option value="SEAT">SEAT</option>
+            <option value="FORD">FORD</option>
+            <option value="KIA">KIA</option>
+            <option value="MAZDA">MAZDA</option>
+            <option value="CHERY">CHERY</option>
+            <option value="TOYOTA">TOYOTA</option>
+            <option value="LAND ROVER">LAND ROVER</option>
+            <option value="MAHINDRA">MAHINDRA</option>
+            <option value="DACIA">DACIA</option>
+            <option value="CHEVROLET">CHEVROLET</option>
+            <option value="HONDA">HONDA</option>
+            <option value="SUZUKI">SUZUKI</option>
+            <option value="SSANGYONG">SSANGYONG</option>
+            <option value="MINI">MINI</option>
+            <option value="JEEP">JEEP</option>
+            <option value="INFINITI">INFINITI</option>
+            <option value="IVECO">IVECO</option>
+            <option value="VOLVO">VOLVO</option>
+            <option value="SKODA">SKODA</option>
+            <option value="AC">AC</option>
+            <option value="LANCIA">LANCIA</option>
+            <option value="GEELY">GEELY</option>
+            <option value="PORSCHE">PORSCHE</option>
+            <option value="ALFA ROMEO">ALFA ROMEO</option>
+            <option value="JAGUAR">JAGUAR</option>
+            <option value="DS">DS</option>
+            <option value="MG">MG</option>
+            <option value="CHRYSLER">CHRYSLER</option>
+            <option value="LADA">LADA</option>
+            <option value="DONGFENG">DONGFENG</option>
+            <option value="CUPRA">CUPRA</option>
+            <option value="HAVAL">HAVAL</option>
+            <option value="GREAT WALL">GREAT WALL</option>
+            <option value="BAIC">BAIC</option>
+            <option value="BYD">BYD</option>
+            <option value="FOTON">FOTON</option>
+            <option value="TATA">TATA</option>
+            <option value="DFSK">DFSK</option>
+            <option value="WALLYSCAR">WALLYSCAR</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="model">Model:</label>
+        <select id="model" name="model">
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" min="0" max="45">
+    </div>
+    <div class="form-group">
+        <label for="mileage">Mileage (km):</label>
+        <input type="number" id="mileage" name="mileage" min="0" max="500000">
+    </div>
+    <div class="form-group">
+        <label for="horsepower">Horse Power:</label>
+        <input type="number" id="horsepower" name="horsepower" min="1" max="100">
+    </div>
+    <div class="form-group">
+        <label for="transmission">Transmission:</label>
+        <select id="transmission" name="transmission">
+            <option value="Manual">Manual</option>
+            <option value="Automatic">Automatic</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="fuel">Fuel:</label>
+        <select id="fuel" name="fuel">
+            <option value="Gasoline">Gasoline</option>
+            <option value="Diesel">Diesel</option>
+            <option value="Hybrid">Hybrid</option>
+            <option value="Electric">Electric</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="button">Predict Price</button>
+    </div>
+
+
+</form>
+
+</section>
+
+<section class="results-container">
+    <p>{{ prediction_text }}</p>
+</section>
+</div>
+<script>
+
+  // Function to update the models dropdown based on the selected manufacturer
+        const manufacturerDropdown = document.getElementById('manufacturer');
+        const modelDropdown = document.getElementById('model');
+    
+        const modelsByManufacturer = {
+            'HYUNDAI': ["GRAND I10", "TUCSON", "H-1", "VELOSTER", "GALLOPER", "ELANTRA", "CRETA", "I10", "KONA", "I20", "AZERA", "IX35", "VENUE"], 
+            'FIAT': ["500", "UNO", "SCUDO", "FIORINO", "SIENA", "DOBLO", "GRANDE PUNTO", "PANDA", "PUNTO", "PALIO", "TIPO", "DUCATO", "MAREA"], 
+            'MITSUBISHI' : ["PAJERO", "L200", "PICK UP", "CANTER", "OUTLANDER", "PAJERO SPORT", "LANCER", "ASX", "ASX 4WD", "MIRAGE"],
+            'RENAULT' :["CLIO", "MEGANE", "SYMBOL", "TRAFIC", "KADJAR", "MASTER", "KANGOO", "R21", "CAPTUR", "EXPRESS", "LAGUNA", "SUPER 5", "R19", "SCENIC", "SPIDER", "ESTAFETTE", "MODUS", "FLUENCE", "KOLEOS", "SAFRANE", "R5", "TWINGO", "R9", "R11", "R4", "ESPACE"],
+            'VOLKSWAGEN' : ["POLO", "PASSAT", "GOLF PLUS", "TIGUAN", "GOLF 7", "GOLF 6", "CADDY", "TOUAREG", "GOLF 8", "GOLF 4", "PASSAT CC", "AMAROK", "JETTA", "SCIROCCO", "TRANSPORTER", "BORA", "CC", "VENTO", "GOLF 5", "TOURAN", "UP", "COCCINELLE", "FOX", "GOLF 7 HIGHLINE", "GOLF 7 R LINE", "POLO 7 PLUS", "GOLF 8 STYLE", "GOLF 8 LIFE", "GOLF 8 RLINE", "POLO R-LINE", "POLO 8", "GOLF 7 GTI", "T-ROC", "GOLF 7 CUP", "POLO 8 AMBITION", "GOLF 8 GTI", "PASSAT TDI", "PASSAT B8", "GOLF 7 LOUNGE", "GOLF 8 UNITED", "POLO 7", "POLO PRESTIGE", "POLO SEDAN", "GOLF 7 TRENDLINE", "PASSAT BLUE MOTION", "GOLF 6 CONFORT", "POLO AMBITION", "GOLF 7 SOUND"],
+            'CITROEN' : ["JUMPY", "C35", "C3", "NEMO", "C4", "BERLINGO", "C5", "C-ELYSEE", "JUMPER", "DS5", "C4 CACTUS", "C1", "SAXO", "DS3", "C4 PICASSO", "AX", "DS4", "COMPACTE", "C15", "C2", "XSARA PICASSO", "NEMO COMBI", "LNA", "ZX", "BX", "C3 AIRCROSS", "BERLINGO MULTISPACE", "DS 7 PERFORMANCE LINE", "DS 7", "C3 SHINE", "BERLINGO K9", "C3 SHINE PLUS", "DS3 SPORT", "JUMPY FOURGON", "C4 II MILLENIUM", "C3 PURETECH", "C4 COUPÉ VTS"],
+            'BMW' : ["SERIE 7", "SERIE 3", "SERIE 1", "CABRIOLET", "SERIE 5", "M3", "SERIE 3 GT", "X1", "X5", "X6", "SERIE 6", "SERIE 4 COUPE", "M5", "SERIE 7 INDIVIDUEL", "SERIE 5 LUXYRY LINE", "SERIE 7 740", "SERIE 2 ACTIVE TOURER PACK M", "SERIE 1 SPORT LINE", "SERIE 4 GRAN COUPE LUXURY", "SERIE 4 GRAN COUPE KIT M", "SERIE 2 ACTIVE TOURER", "X3", "SERIE 4 GRAN COUPE", "SERIE 3 318I", "SERIE 3 KIT M", "SERIE 4 GRAN COUPE M", "SERIE 1 PACK SPORT", "SERIE 1 BOÎTE AUTOMATIQUE", "SERIE 3 M", "SERIE 5 BUSINESS LINE", "SERIE 3 316 I", "M1", "SERIE 1 URBAIN", "SERIE 3 BUSINESS", "SERIE 3 LUXURY LINE", "SERIE 5 N46T", "SERIE 4 COUPE KIT M", "SERIE 3 LUXURY", "SERIE 3 KIT M PERFORMANCE", "SERIE 3 CABRIOLET", "SERIE 3 318I LUXURY PACKAGE", "SERIE 5 520I FACELIFT", "SERIE 5 KIT LUXURY", "SERIE 5 KIT M", "SERIE 5 G30", "SERIE 4 COUPE M", "SERIE 2 GRAN COUPE M SPORT", "SERIE 5 F10", "SERIE 3 MODERN", "Z3", "SERIE 3 F30 316 I", "SERIE 1 BUSINESS LINE", "SERIE 3 SPORT", "SERIE 5 LUXURY", "SERIE 1 KIT M", "SERIE 3 COUPE", "SERIE 6 630I", "SERIE 1 M SPORT", "SERIE 4 GRAN COUPE BUSINESS LINE", "SERIE 3 320I", "SERIE 3 COUPE E46 PACK M", "SERIE 3 F30 PACK M", "SERIE 3 LOUNGE"],
+            'PEUGEOT' : ["301", "308 SW", "BIPPER", "208", "407", "206+", "206", "106", "PARTNER", "308", "2008", "3008", "508", "207", "RCZ", "406", "205", "EXPERT", "309", "307", "107", "307 SW", "407 SW", "4008", "MONOSPACE", "207 SW", "5008", "305", "BOXER", "BIPPER TEPEE", "108", "405", "505", "607", "306", "3008 GT LINE", "508 PREMUIM", "3008 ALLURE", "308 CC CABRIOLET", "208 EHDI", "PARTNER K9", "407 NAVTEQ", "2008 PURTECH", "508 BVA EDITION LIMITEE", "2008 GT LINE", "LANDTREK", "2008 ALLURE", "2008 PURETECH", "308 CC", "308 GT LINE", "307 HDI", "208 STYLE", "508 FO", "301 COMFORT", "2008 ACTIVE", "208 GT LINE"],
+            'AUDI' :  ["A4", "Q3", "A3", "80", "Q5", "A6", "A1", "A5", "QUATTRO", "Q7", "50", "S3", "A5 SPORTBACK", "Q2", "A5 CABRIOLET", "A3 SPORTBACK", "Q5 S LINE", "Q3 S LINE", "Q5 QUATTRO COUPE S LINE", "Q5 SPORTBACK S LINE", "A3 S LINE", "A5 COUPE KIT RS 5", "Q2 COMFORT LINE", "A4 COMFORT", "A5 SPORTBACK S LINE", "RS Q3", "Q3 SPORTBACK", "TT S LINE", "Q5 QUATTRO TDI", "A4 CABRIOLET", "A4 S LINE", "A5 COUPE S LINE", "A3 BUSINESS", "A3 TSI 1.2", "Q2 TDI"],
+            'MERCEDES' : ["C", "E", "B", "GLK", "CLK", "C COUPE", "MERCEDES. E", "CITAN", "210", "CLA", "250", "190", "UTILITAIRE", "220", "A", "ML", "M", "CLS", "200", "GLA", "S", "VIANO", "280", "230", "GLC 200 COUPE", "S 350", "GLC 300E COUPE", "C KIT AMG", "A 250E", "GLA KIT AMG", "CLA BUISNESS", "S KIT AMG", "CLA KIT AMG", "A KIT AMG", "GLC", "C AMG", "E BUSINESS", "C 180 PACK AMG", "GLA AMG", "CLA AMG", "GLC COUPE KIT AMG", "A 180", "E 300DE AMG-DESIGNO", "C 180 BVA", "CLA 180", "C 200 KIT AMG", "C 300E PACK AMG", "CL", "E 350 COUPE", "C PACK AMG", "E KIT AMG", "GLA 250 E KIT AMG", "C COUPE AMG", "C 200 EQ BOOST AMG", "A AMG", "C BUSINESS", "E 220", "SPRINTER VAN", "C AVANTGARDE", "GLC COUPE", "GLC AMG", "GLA 250E KIT AMG", "GLA 250E", "C 180 COUPEE KIT AMG", "A 250E AMG", "C 180", "C COUPE KIT AMG PACK NIGHT", "A 200 AMG", "E AVANTGARDE", "C 200", "C 180 KIT AMG", "GLE COUPE AMG", "C 180 AMG", "E COUPE", "CLA 180 AMG", "E 200 KIT AMG", "B PACK", "C 200 PACK AMG", "E 180 KITT AMG", "S 300 KIT AMG", "C 220", "E COUPE AMG", "C W205 KIT AMG", "A SPORT", "A URBAN", "E AMG", "GLA 200 AMG", "B 160", "C 200D", "CLS 250 AMG", "CLA 180 D", "C ELEGANCE", "E 300", "E 200", "GLE E 350 COUPE", "E 180 KIT AMG", "C 180 COUPE", "C 180 AVANTGARDE", "E COUPE AVANTGARDE", "A CITADINE", "220 KIT AMG", "C AMG SPORT PACK", "CLA 200 KIT AMG", "S 500", "A 200 KIT AMG"],
+            'NISSAN' : ["X-TRAIL", "JUKE", "QASHQAI", "NAVARA", "MICRA", "MURANO", "PATROL", "TERRANO", "PATROL GR", "PIXO", "QASHQAI TEKNA PLUS", "QASHQAI TEKNA +", "QASHQAI+2", "JUKE N-DESIGN", "JUKE TEKNA", "QASHQAI PURE", "SUNNY"],
+            'SEAT' : ["IBIZA", "LEON", "AROSA", "LEON ST", "TOLEDO", "CORDOBA", "EXEO", "ALTEA", "TERRA", "ARONA", "LEON STYLE", "LEON STYLE +", "IBIZA BVA", "ATECA", "IBIZA PLUS", "ATECA-TT OPTION", "ATECA-PREMIERE MAIN", "LEON TSI STYLE", "LEON SC"],
+            'FORD' : ["FOCUS", "MONDEO", "FIESTA", "ESCAPE", "RANGER", "KUGA", "COURRIER", "KA", "ESCORT", "FUSION", "TRANSIT", "EXPEDITION", "ECOSPORT", "C-MAX", "COUGAR", "S-MAX", "FIGO"],
+            'KIA': ["PICANTO", "SPORTAGE", "RIO", "MOHAVE", "CERATO", "SORENTO", "CARENS", "C'EED", "OPTIMA", "SOUL", "RIO 5P GT-LINE", "RIO 5P", "RIO 5P GX", "SPORTAGE BVA", "SORENTO BVA", "SPORTAGE GT-LINE", "PICANTO GT-LINE", "RIO 5P PRESTIGE", "RIO 5P SX", "RIO 5P PRESTIGE EDITION", "SPORTAGE BLACK EDITION", "XCEED", "SPORTAGE BVM", "SELTOS", "PICANTO BVA GT-LINE"],
+            'MAZDA' : ["3", "MX3", "CX-9", "CX-5", "BT-50", "6", "2", "E2000", "CX-7", "MX-3", "323", "MX-5", "B SERIES"],
+            'CHERY' : ["TIGGO", "QQ", "V5", "A3", "A1", "A5", "QQ6", "TIGGO 8", "TIGGO 2", "E3", "ARRIZO 5", "TIGGO 3", "TIGGO 3X LUXURY", "TIGGO 3X", "ARRIZO 3", "TIGGO 8 PRO", "TIGGO 2 SUPER", "TIGGO 7 PRO"],
+            'TOYOTA': ["RAV 4", "YARIS", "YARIS VERSO", "STARLET", "MR", "AYGO", "PRADO", "HILUX", "4RUNNER", "COROLLA", "AVENSIS", "VERSO", "HI ACE", "C-HR", "LAND CRUISER", "AGYA", "LAND CRUISER VX", "PRADO GX", "RAV 4 GRIS SILVER", "C-HR BVA", "RAV 4 SUV", "YARIS SEDAN", "AVENSIS 115 D-4D LINEA SOL"],
+            'LAND ROVER' : ["RANGE ROVER", "FREELANDER", "RANGE ROVER SPORT", "DEFENDER", "DISCOVERY", "RANGE ROVER EVOQUE R-DYNAMIC", "DISCOVERY SPORT", "RANGE ROVER EVOQUE", "RANGE ROVER SPORT HSE-DYNAMIC", "RANGE ROVER SPORT HSE", "DISCOVERY LR3 HSE", "RANGE ROVER SPORT HSE P400E", "RANGE ROVER EVOQUE SE P300E", "RANGE ROVER VELAR", "RANGE ROVER VELAR DYNAMIQUE", "RANGE ROVER SPORT SPORT", "RANGE ROVER VELAR R-DYNAMIC", "DEFENDER 110", "RANGE ROVER VELAR P250", "RANGE ROVER SPORT P400E", "RANGE ROVER SUPERCHARGED", "FREELANDER 2", "RANGE ROVER EVOQUE DYNAMIC", "DISCOVERY SE", "RANGE ROVER SPORT AUTOBIOGRAPHY", "RANGE ROVER EVOQUE HSE D180"],
+            'MAHINDRA' : ["HOVER", "SCORPION", "BOLERA", "SCORPIO PICK-UP DC", "KUV 100", "KUV 100 K8", "SCORPIO SUV", "XUV 300 W8"],
+            'DACIA' : ["LOGAN", "DUSTER", "LOGAN MCV", "DOKKER", "SANDERO", "DOKKER VAN", "SANDERO STEPWAY"],
+            'CHEVROLET' : ["CRUZE", "OPTRA", "AVEO", "CAPTIVA", "S-10", "TRACKER", "SPARK", "LACETTI", "TRAX", "MATIZ", "CAPTIVA AWD", "AVEO LS", "SONIC", "CAMARO RS COUPE", "SONIC 4P"],
+            'HONDA' : ["CITY", "CIVIC", "HR-V", "BRIO AMAZE", "ACCORD", "BRIO"],
+            'SUZUKI' : ["CELERIO", "ALTO", "BALENO", "VITARA", "SWIFT", "SAMURAI", "MARUTI", "WAGON R", "DZIRE"],
+            'SSANGYONG' : ["REXTON", "FAMILY", "ACTYON", "KORANDO", "TIVOLI", "TIVOLI XLV", "ACTYON*4", "MUSSO", "KYRON", "KORANDO DUNE", "ACTYONX4"],
+            'MINI': ["ONE", "COOPER", "COUNTRYMAN", "MINI", "MINI CABRIOLET", "COUNTRYMAN S*4", "COOPER S", "COUPE ONE", "3 PORTES", "5 PORTES"],
+            'JEEP': ["GRAND CHEROKEE", "COMPASS", "CHEROKEE", "RENEGADE", "RENEGADE TURBO LIMITED BVA", "WRANGLER", "GRAND CHEROKEE LIMITED", "RENEGADE ROUGE", "WRANGLER SAHARA"],
+            'INFINITI': ["EX35", "FX35", "FX"],
+            'IVECO': ["DAILY", "DAILY COMBI"],
+            'VOLVO': ["XC60", "S40", "C30", "S60 R DESIGN", "V40"],
+            'SKODA': ["FABIA", "OCTAVIA", "OCTAVIA COMFORT LINE", "SUPERB AMBASSADOR", "KAROQ XCELLANCE"],
+            'AC': ["SEVEN"],
+            'LANCIA' : ["YPSILON"],
+            'GEELY': ["GK-GS", "GK-GL", "MK-GL", "GC6"],
+            'PORSCHE': ["BOXSTER", "CAYENNE", "CAYENNE GTS", "CAYENNE PACK NIGHT 3.6L", "CAYENNE COUPE", "PANAMERA 4S", "MACAN S", "PANAMERA", "MACAN", "MACAN TURBO", "CAYENNE KIT TURBO", "CAYENNE TURBO", "CAYENNE KIT GTS", "PANAMERA PLATINUM EDITION", "CAYENNE COUPE FULL BLACK PACK S"],
+            'ALFA ROMEO': ["MITO", "145", "159", "156", "147", "GIULIETTA", "GIULIETTA QUADRIFOGLIO", "STELVIO SPORT"],
+            'JAGUAR': ["XF", "E-PACE R-DYNAMIC", "E-PACE R-DYNAMIC S", "F-PACE R-SPORT DYNAMIQUE", "XE R-SPORT", "XF R-SPORT", "XJ L", "XF 2.0", "F-PACE R-DYNAMIC"],
+            'DS': ["DS3", "DS5", "7 CROSSBACK PERFORMANCE LINE", "3 PERFORMANCE LINE", "3 CHROMATIQUE", "3"],
+            'MG': ["ZS", "GS AWD", "GT", "6", "5", "GS", "HS", "ZS LUXURY", "EHS SUV"],
+            'CHRYSLER' : ["VOYAGER"],
+            'LADA': ["NIVA", "NIVA CLASSIC"],
+            'DONGFENG': ["S50", "AX4", "T5 EVO", "SX3", "S50 JOYEER"],
+            'CUPRA': ["FORMENTOR HIGHT-GRADE", "FORMENTOR"],
+            'HAVAL': ["H6", "H6 LUXURY", "JOLION", "H2"],
+            'GREAT WALL': ["POER", "M4"],
+            'BAIC' : ['YX KENBO S2'],
+            'BYD' :['SONG'],
+            'FOTON' : ['FORLAND'],
+            'TATA': ['XENON X2'],
+            'DFSK': ["GLORY 580", "K01"],
+            'WALLYSCAR' : ['IRIS']
+ };
+    
+        
+        function updateModels() {
+            modelDropdown.innerHTML = '';
+    
+            const selectedManufacturer = manufacturerDropdown.value;
+    
+            const models = modelsByManufacturer[selectedManufacturer];
+    
+            models.forEach(model => {
+                const option = document.createElement('option');
+                option.textContent = model;
+                option.value = model;
+                modelDropdown.appendChild(option);
+            });
+        }
+    
+        manufacturerDropdown.addEventListener('change', updateModels);
+    
+        updateModels();
+
+
+
+
+</script>
+
+</body>
+</html>

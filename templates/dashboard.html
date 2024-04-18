@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Dashboard</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        nav.navbar {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+        }
+
+        nav.navbar ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+            padding: 0;
+        }
+
+        nav.navbar ul li {
+            margin-right: 1rem;
+        }
+
+        nav.navbar ul li a {
+            text-decoration: none;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav.navbar ul li a:hover {
+            background-color: #555;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #333;
+        }
+
+        .options-list {
+            list-style-type: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .options-list li {
+            cursor: pointer;
+            margin: 0.5rem;
+            padding: 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+        }
+
+        .options-list li:hover {
+            background-color: #f4f4f4;
+        }
+
+        .options-list li img {
+            margin-right: 1rem;
+            max-width: 30px;
+            height: auto;
+        }
+
+        .average-values {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background-color: #f4f4f4;
+            border-radius: 10px;
+        }
+
+        .average-box {
+            text-align: center;
+        }
+
+        .average-box p {
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+            color: #555;
+        }
+
+        .graph-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 2rem;
+        }
+
+        .graph {
+            width: 100%;
+            height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+        .options-list li.selected {
+            background-color: skyblue;
+        }
+        
+
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/Understand the Market">Understand the Market</a></li>
+        <li><a href="/prediction">Predict Price</a></li>
+    </ul>
+</nav>
+
+</div>
+
+
+
+
+<h2 style=>Manufacturer</h2>
+
+              <div class="container">
+                    <ul class="options-list">
+                        <li data-value='VOLKSWAGEN'><img src='https://www.carlogos.org/car-logos/volkswagen-logo.png' alt='VOLKSWAGEN Logo' style='width: 30px; height: auto;'> VOLKSWAGEN</li> 
+                        <li data-value='MERCEDES'><img src='https://www.carlogos.org/car-logos/mercedes-benz-logo.png' alt='MERCEDES Logo' style='width: 30px; height: auto;'> MERCEDES</li>
+                        <li data-value='CITROEN'><img src='https://www.carlogos.org/car-logos/citroen-logo.png' alt='CITROEN Logo' style='width: 30px; height: auto;'> CITROEN</li>
+                        <li data-value='MITSUBISHI'><img src='https://www.carlogos.org/car-logos/mitsubishi-logo.png' alt='MITSUBISHI Logo' style='width: 30px; height: auto;'> MITSUBISHI</li> 
+                        <li data-value='KIA'><img src='https://www.carlogos.org/car-logos/kia-logo.png' alt='KIA Logo' style='width: 30px; height: auto;'> KIA</li>
+                        <li data-value='DACIA'><img src='https://www.carlogos.org/car-logos/dacia-logo.png' alt='DACIA Logo' style='width: 30px; height: auto;'> DACIA</li>
+                        <li data-value='MAHINDRA'><img src='https://www.carlogos.org/car-logos/mahindra-logo.png' alt='MAHINDRA Logo' style='width: 30px; height: auto;'> MAHINDRA</li>
+                        <li data-value='HONDA'><img src='https://www.carlogos.org/car-logos/honda-logo.png' alt='HONDA Logo' style='width: 30px; height: auto;'> HONDA</li> 
+                        <li data-value='SKODA'><img src='https://www.carlogos.org/car-logos/skoda-logo.png' alt='SKODA Logo' style='width: 30px; height: auto;'> SKODA</li>
+                        <li data-value='AUDI'><img src='https://www.carlogos.org/car-logos/audi-logo.png' alt='AUDI Logo' style='width: 30px; height: auto;'> AUDI</li>
+                        <li data-value='PEUGEOT'><img src='https://www.carlogos.org/car-logos/peugeot-logo.png' alt='PEUGEOT Logo' style='width: 30px; height: auto;'> PEUGEOT</li> 
+                        <li data-value='CHERY'><img src='https://www.carlogos.org/car-logos/chery-logo.png' alt='CHERY Logo' style='width: 30px; height: auto;'> CHERY</li> 
+                        <li data-value='SEAT'><img src='https://www.carlogos.org/car-logos/seat-logo.png' alt='SEAT Logo' style='width: 30px; height: auto;'> SEAT</li> 
+                        <li data-value='BMW'><img src='https://www.carlogos.org/car-logos/bmw-logo.png' alt='BMW Logo' style='width: 30px; height: auto;'> BMW</li> 
+                        <li data-value='FIAT'><img src='https://www.carlogos.org/car-logos/fiat-logo.png' alt='FIAT Logo' style='width: 30px; height: auto;'> FIAT</li> 
+                        <li data-value='FORD'><img src='https://www.carlogos.org/car-logos/ford-logo.png' alt='FORD Logo' style='width: 30px; height: auto;'> FORD</li> 
+                        <li data-value='HYUNDAI'><img src='https://www.carlogos.org/car-logos/hyundai-logo.png' alt='HYUNDAI Logo' style='width: 30px; height: auto;'> HYUNDAI</li> 
+                        <li data-value='MAZDA'><img src='https://www.carlogos.org/car-logos/mazda-logo.png' alt='MAZDA Logo' style='width: 30px; height: auto;'> MAZDA</li> 
+                        <li data-value='RENAULT'><img src='https://www.carlogos.org/car-logos/renault-logo.png' alt='RENAULT Logo' style='width: 30px; height: auto;'> RENAULT</li> 
+                        <li data-value='SUZUKI'><img src='https://www.carlogos.org/car-logos/suzuki-logo.png' alt='SUZUKI Logo' style='width: 30px; height: auto;'> SUZUKI</li> 
+                        <li data-value='INFINITI'><img src='https://www.carlogos.org/car-logos/infiniti-logo.png' alt='INFINITI Logo' style='width: 30px; height: auto;'> INFINITI</li> 
+                        <li data-value='IVECO'><img src='https://www.carlogos.org/car-logos/iveco-logo.png' alt='IVECO Logo' style='width: 30px; height: auto;'> IVECO</li> 
+                        <li data-value='VOLVO'><img src='https://www.carlogos.org/car-logos/volvo-logo.png' alt='VOLVO Logo' style='width: 30px; height: auto;'> VOLVO</li>
+                        <li data-value='AC'><img src='https://www.carlogos.org/car-logos/ac-logo.png' alt='AC Logo' style='width: 30px; height: auto;'> AC</li>
+                        <li data-value='LANCIA'><img src='https://www.carlogos.org/car-logos/lancia-logo.png' alt='LANCIA Logo' style='width: 30px; height: auto;'> LANCIA</li> 
+                        <li data-value='GEELY'><img src='https://www.carlogos.org/car-logos/geely-logo.png' alt='GEELY Logo' style='width: 30px; height: auto;'> GEELY</li> 
+                        <li data-value='ALFA ROMEO'><img src='https://www.carlogos.org/car-logos/alfa-romeo-logo.png' alt='ALFA ROMEO Logo' style='width: 30px; height: auto;'> ALFA ROMEO</li> 
+                        <li data-value='DS'><img src='https://www.carlogos.org/car-logos/ds-logo.png' alt='DS Logo' style='width: 30px; height: auto;'> DS</li> 
+                        <li data-value='DONGFENG'><img src='https://www.carlogos.org/car-logos/dongfeng-logo.png' alt='DONGFENG Logo' style='width: 30px; height: auto;'> DONGFENG</li> 
+                        <li data-value='BYD'><img src='https://www.carlogos.org/car-logos/byd-logo.png' alt='BYD Logo' style='width: 30px; height: auto;'> BYD</li>
+                        <li data-value='FOTON'><img src='https://www.carlogos.org/car-logos/foton-logo.png' alt='FOTON Logo' style='width: 30px; height: auto;'> FOTON</li>
+                        <li data-value='DFSK'><img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBwPDiklCkUDQ2GuYvtCzZ3eRd0CGAxJlhsQ&s' alt='DFSK Logo' style='width: 30px; height: auto;'> DFSK</li> 
+                        <li data-value='WALLYSCAR'><img src='//upload.wikimedia.org/wikipedia/commons/thumb/e/ee/LOGO_WALLYSCAR.jpg/200px-LOGO_WALLYSCAR.jpg' alt='WALLYSCAR Logo' style='width: 30px; height: auto;'> WALLYSCAR</li> 
+                        <li data-value='LADA'><img src='https://www.carlogos.org/car-logos/lada-logo.png' alt='LADA Logo' style='width: 30px; height: auto;'> LADA</li>
+                        <li data-value='TATA'><img src='https://www.carlogos.org/car-logos/tata-logo.png' alt='TATA Logo' style='width: 30px; height: auto;'> TATA</li> 
+                        <li data-value='BAIC'><img src='https://www.carlogos.org/car-logos/baic-logo.png' alt='BAIC Logo' style='width: 30px; height: auto;'> BAIC</li> 
+                        <li data-value='GREAT WALL'><img src='https://i.pinimg.com/736x/22/0a/8b/220a8b8afd254c8d93806825a5bd3ee8.jpg' alt='GREAT WALL Logo' style='width: 30px; height: auto;'> GREAT WALL</li> 
+                        <li data-value='HAVAL'><img src='https://www.carlogos.org/car-logos/haval-logo.png' alt='HAVAL Logo' style='width: 30px; height: auto;'> HAVAL</li> 
+                        <li data-value='CUPRA'><img src='https://w7.pngwing.com/pngs/510/173/png-transparent-cupra-hd-logo-thumbnail.png' alt='CUPRA Logo' style='width: 30px; height: auto;'> CUPRA</li> 
+                        <li data-value='MG'><img src='https://www.carlogos.org/car-logos/mg-logo.png' alt='MG Logo' style='width: 30px; height: auto;'> MG</li> 
+                        <li data-value='CHRYSLER'><img src='https://www.carlogos.org/car-logos/chrysler-logo.png' alt='CHRYSLER Logo' style='width: 30px; height: auto;'> CHRYSLER</li>
+                        <li data-value='LAND ROVER'><img src='//upload.wikimedia.org/wikipedia/en/thumb/9/9f/Land_Rover_logo_black.svg/594px-Land_Rover_logo_black.svg.png?20210723155746' alt='LAND ROVER Logo' style='width: 30px; height: auto;'> LAND ROVER</li> 
+                        <li data-value='JAGUAR'><img src='https://www.carlogos.org/car-logos/jaguar-logo.png' alt='JAGUAR Logo' style='width: 30px; height: auto;'> JAGUAR</li>
+                        <li data-value='SSANGYONG'><img src='https://www.carlogos.org/car-logos/ssangyong-logo.png' alt='SSANGYONG Logo' style='width: 30px; height: auto;'> SSANGYONG</li>
+                        <li data-value='NISSAN'><img src='https://www.carlogos.org/car-logos/nissan-logo.png' alt='NISSAN Logo' style='width: 30px; height: auto;'> NISSAN</li>
+                        <li data-value='JEEP'><img src='https://www.carlogos.org/car-logos/jeep-logo.png' alt='JEEP Logo' style='width: 30px; height: auto;'> JEEP</li>
+                        <li data-value='PORSCHE'><img src='https://www.carlogos.org/car-logos/porsche-logo.png' alt='PORSCHE Logo' style='width: 30px; height: auto;'> PORSCHE</li>
+                        <li data-value='MINI'><img src='https://www.carlogos.org/car-logos/mini-logo.png' alt='MINI Logo' style='width: 30px; height: auto;'> MINI</li> 
+                        <li data-value='CHEVROLET'><img src='https://www.carlogos.org/car-logos/chevrolet-logo.png' alt='CHEVROLET Logo' style='width: 30px; height: auto;'> CHEVROLET</li> 
+                        <li data-value='TOYOTA'><img src='https://www.carlogos.org/car-logos/toyota-logo.png' alt='TOYOTA Logo' style='width: 30px; height: auto;'> TOYOTA</li>
+                        </ul>
+
+                        <div class="average-values">
+                            <div class="average-box">
+                                <p id="averageAge"></p>
+                            </div>
+                            <div class="average-box">
+                                <p id="averageMileage"></p>
+                            </div>
+                            <div class="average-box">
+                                <p id="averagePrice"></p>
+                            </div>
+                        </div>
+                        <div class="graph-container">
+                            <div id="graph1" class="graph"></div>
+                            <div id="graph2" class="graph"></div>
+                            <div id="graph3" class="graph"></div>
+                            <div id="graph4" class="graph"></div>
+                            
+                            <div id="graph6" class="graph"></div>
+                            <div id="graph7" class="graph"></div>
+                        </div>
+                        <div id="graph5" class="graph"></div>
+                    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const options = document.querySelectorAll('.options-list li');
+        
+            options.forEach(option => {
+                option.addEventListener('click', function() {
+                    options.forEach(opt => opt.classList.remove('selected'));
+        
+                    this.classList.add('selected');
+                    var selectedValue = this.dataset.value;
+                    updateGraphs(selectedValue);
+                });
+            });
+        
+            var graph1Div = document.getElementById('graph1');
+            var graph2Div = document.getElementById('graph2');
+            var graph3Div = document.getElementById('graph3');
+            var graph4Div = document.getElementById('graph4');
+            var graph5Div = document.getElementById('graph5');
+            var graph6Div = document.getElementById('graph6');
+            var graph7Div = document.getElementById('graph7');
+        
+            var optionsList = document.querySelector('.options-list');
+            var selectedValue = optionsList.querySelector('li').dataset.value;
+            updateGraphs(selectedValue);
+        });
+        
+        function updateGraphs(selectedValue) {
+            var graph1Div = document.getElementById('graph1');
+            var graph2Div = document.getElementById('graph2');
+            var graph3Div = document.getElementById('graph3');
+            var graph4Div = document.getElementById('graph4');
+            var graph5Div = document.getElementById('graph5');
+            var graph6Div = document.getElementById('graph6');
+            var graph7Div = document.getElementById('graph7');
+        
+            fetch('/update_graphs', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'selected_value=' + selectedValue
+            })
+            .then(response => response.json())
+            .then(data => {
+                Plotly.react(graph1Div, JSON.parse(data.graph1JSON), {});
+                Plotly.react(graph2Div, JSON.parse(data.graph2JSON), {});
+                Plotly.react(graph3Div, JSON.parse(data.graph3JSON), {});
+                Plotly.react(graph4Div, JSON.parse(data.graph4JSON), {});
+                Plotly.react(graph5Div, JSON.parse(data.graph5JSON), {});
+                Plotly.react(graph6Div, JSON.parse(data.graph6JSON), {});
+                Plotly.react(graph7Div, JSON.parse(data.graph7JSON), {});
+        
+                document.getElementById('averageAge').innerText = 'Average Age: ' + data.average_age.toFixed(2);
+                document.getElementById('averageMileage').innerText = 'Average Mileage: ' + data.average_mileage.toFixed(2);
+                document.getElementById('averagePrice').innerText = 'Average Price: ' + data.average_price.toFixed(2);
+            });
+        }
+    </script>
+    
+    
+</body>
+</html>
