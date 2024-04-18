@@ -537,29 +537,10 @@ iframe {
 </div>
 
 <script>
-   // Get the map JSON data passed from Flask
-    var map_json = {{ map_json|safe }};
+// Parse the JSON representation of the graph
+        var cars_man_json = {{ cars_man_json | tojson }};
 
-    // Parse the JSON data
-    var map_data = JSON.parse(map_json);
-
-    // Create a new map instance
-    var map = L.map('map').setView([0, 0], 2);
-
-    // Add the OpenStreetMap tiles as the base layer
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors'
-    }).addTo(map);
-
-    // Add the choropleth layer to the map
-    var choroplethLayer = L.geoJSON(map_data, {
-        style: function (feature) {
-            return {color: 'green'};
-        }
-    }).addTo(map);
-
-    // Fit the map bounds to the choropleth layer
-    map.fitBounds(choroplethLayer.getBounds());
-</script>
+        // Render the graph using Plotly.js
+        Plotly.newPlot('graph11', JSON.parse(cars_man_json).data, JSON.parse(cars_man_json).layout);
 </body>
 </html>
