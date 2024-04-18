@@ -74,7 +74,7 @@ def prediction():
 
 
         X_meta = np.column_stack((predicted_price_xgb,predicted_price_lgb,predicted_price_cat,))
-        predicted_price = meta_model.predict(X_meta)
+       # predicted_price = meta_model.predict(X_meta)
         
 
         
@@ -89,42 +89,42 @@ def understand_the_market():
 
 @app.route("/graphs/cars_by_country_map", methods=['GET'])
 def cars_by_country_map():
-    return render_template('graphs/cars_by_country_map.html')
+    return render_template('templates/graphs/cars_by_country_map.html')
 
 @app.route("/graphs/cars_manufacturers", methods=['GET'])
 def cars_cars_manufacturers():
-    return render_template('graphs/cars_manufacturers.html')
+    return render_template('templates/graphs/cars_manufacturers.html')
 
 @app.route("/graphs/price_PD", methods=['GET'])
 def price_PD():
-    return render_template('graphs/price_PD.html')
+    return render_template('templates/graphs/price_PD.html')
 
 @app.route("/graphs/price_PD_inflation", methods=['GET'])
 def price_PD_inflation():
-    return render_template('/graphs/price_PD_inflation.html')
+    return render_template('templates/graphs/price_PD_inflation.html')
 
 @app.route("/graphs/price_age", methods=['GET'])
 def price_age():
-    return render_template('/graphs/price_age.html')
+    return render_template('templates/graphs/price_age.html')
 
 @app.route("/graphs/mileage_price distribution", methods=['GET'])
 def mileage_price():
-    return render_template('/graphs/mileage_price distribution.html')
+    return render_template('templates/graphs/mileage_price distribution.html')
 
 @app.route("/graphs/fig_transmission", methods=['GET'])
 def fig_transmission():
-    return render_template('/graphs/fig_transmission.html')
+    return render_template('templates/graphs/fig_transmission.html')
 @app.route("/graphs/fig_fuel", methods=['GET'])
 def fig_fuel():
     return render_template('/graphs/fig_fuel.html')
 
 @app.route("/graphs/fig_avg_price_fuel", methods=['GET'])
 def fig_avg_price_fuel():
-    return render_template('/graphs/fig_avg_price_fuel.html')
+    return render_template('templates/graphs/fig_avg_price_fuel.html')
 
 @app.route("/graphs/fig_avg_price_transmission", methods=['GET'])
 def fig_avg_price_transmission():
-    return render_template('/graphs/fig_avg_price_transmission.html')
+    return render_template('templates/graphs/fig_avg_price_transmission.html')
 
 df = pd.read_csv(r"EDA Data/EDA.csv")
 
