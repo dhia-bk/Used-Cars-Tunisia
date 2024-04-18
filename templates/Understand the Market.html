@@ -482,7 +482,7 @@ iframe {
           
     </div>
     <section class="graph-container">
-        <div id="graph-placeholder"></div>
+        <iframe id="plotly-chart""></iframe>
     </section>
 </div>
 
@@ -536,21 +536,21 @@ iframe {
 
 </div>
     <script>
-   // Parse the JSON data
-    var carsManData = JSON.parse({{ cars_man_json | tojson }});
+// Parse the JSON data
+    var carsManData = JSON.parse('{{ cars_man_json | tojson | safe }}');
 
     // Get the HTML content of the Plotly chart
     var chartHtml = carsManData['data'];
 
-    // Render the chart in the iframe
-    var iframeDocument = document.createElement('iframe');
-    iframeDocument.srcdoc = chartHtml;
-    iframeDocument.style.width = '100%';
-    iframeDocument.style.height = '600px';
-    iframeDocument.style.border = 'none';
-
-    // Append the iframe to the placeholder
-    document.getElementById('graph-placeholder').appendChild(iframeDocument);
+    // Update the content of the iframe with the Plotly chart HTML
+    var iframe = document.getElementById('plotly-chart');
+    var iframeDocument = iframe.contentWindow || iframe.contentDocument;
+    if (iframeDocument.document) {
+        iframeDocument = iframeDocument.document;
+    }
+    iframeDocument.open();
+    iframeDocument.writeln(chartHtml);
+    iframeDocument.close();
 </script>
 </body>
 </html>
