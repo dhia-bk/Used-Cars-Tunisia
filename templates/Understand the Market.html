@@ -536,7 +536,7 @@ iframe {
 
 </div>
     <script>
-        var graphJSON = {{ plot | safe }};
+        var graphJSON = {{ cars_man_json | safe }};
         Plotly.newPlot('graph', graphJSON.data, graphJSON.layout);
 </script>
 </body>
