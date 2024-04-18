@@ -480,8 +480,8 @@ iframe {
           </table>
           
     </div>
-    <section class="graph11-container">
-        <iframe class="graph-iframe map" src="/graphs/cars_manufacturers"></iframe>
+    <section class="graph-container">
+        <div id="graph-placeholder"></div>
     </section>
 </div>
 
@@ -534,5 +534,19 @@ iframe {
     </button>
 
 </div>
+    <script>
+    // Parse the JSON data
+    var carsManData = JSON.parse({{ cars_man_json | tojson }});
+
+    // Render the chart in the iframe
+    var iframeDocument = document.createElement('iframe');
+    iframeDocument.srcdoc = carsManData['data'];
+    iframeDocument.style.width = '100%';
+    iframeDocument.style.height = '600px';
+    iframeDocument.style.border = 'none';
+
+    // Append the iframe to the placeholder
+    document.getElementById('graph-placeholder').appendChild(iframeDocument);
+</script>
 </body>
 </html>
