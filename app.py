@@ -130,8 +130,7 @@ def understand_the_market():
     # Add Layer Control to toggle between Choropleth and MarkerCluster
     folium.LayerControl().add_to(m)
     map_json = m.to_json()
-
- return render_template('Understand the Market.html', map_json=map_json)
+    return render_template('Understand the Market.html', map_json=map_json)
 
 @app.route("/graphs/cars_by_country_map", methods=['GET'])
 def cars_by_country_map():
