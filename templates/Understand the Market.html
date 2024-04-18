@@ -482,15 +482,15 @@ iframe {
           
     </div>
     <section class="graph-container">
-    <div id="graph" style = "height = 100%; width = 100% "></div>
+    <div id="graph1" style = "height = 100%; width = 100% "></div>
     </section>
 </div>
 
 <div class="price-container">
     <h1>How does the price change over time?</h1>
     <div class="price_PD">
-        <iframe  frameborder="1" width="50%" height="100%"></iframe>
-        <iframe  frameborder="1" width="50%" height="100%"></iframe>
+        <div id = "graph2" frameborder="1" width="50%" height="100%"></div>
+        <div  id = "graph3" frameborder="1" width="50%" height="100%"></dic>
     </div>
     <div class="price_age">
         <iframe src="/graphs/price_age" frameborder="1" width="50%" height="400px"></iframe>
@@ -536,8 +536,14 @@ iframe {
 
 </div>
     <script>
-        var graphJSON = {{ cars_man_json | safe }};
-        Plotly.newPlot('graph', graphJSON.data, graphJSON.layout);
+        var graphJSON1 = {{ cars_man_json | safe }};
+        Plotly.newPlot('graph1', graphJSON1.data, graphJSON1.layout);
+
+        var graphJSON2 = {{ price_dis_json | safe }};
+        Plotly.newPlot('graph2', graphJSON2.data, graphJSON2.layout);
+
+        var graphJSON3 = {{ price_inf_json | safe }};
+        Plotly.newPlot('graph3', graphJSON3.data, graphJSON3.layout);
 </script>
 </body>
 </html>
