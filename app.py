@@ -153,7 +153,44 @@ def understand_the_market():
     )
 
     price_inf_json = fig.to_json()
-    return render_template('Understand the Market.html', cars_man_json=cars_man_json, price_dis_json=price_dis_json, price_inf_json=price_inf_json)
+
+    grouped_data = df.groupby('Age').agg({'Price': 'mean'}).reset_index()
+    
+    median_price = df.groupby('Age')['Price'].median().reset_index()
+    
+    # Create a scatter plot
+    fig = go.Figure()
+    
+    fig.add_trace(go.Scatter(
+        x=grouped_data['Age'],
+        y=grouped_data['Price'],
+        mode='lines+markers',
+        marker=dict(color='blue', size=8),
+        line=dict(color='blue', width=2),
+        name='Mean Price'
+    ))
+    
+    fig.add_trace(go.Scatter(
+        x=median_price['Age'],
+        y=median_price['Price'],
+        mode='lines+markers',
+        marker=dict(color='red', size=8),
+        line=dict(color='red', width=2),
+        name='Median Price'
+    ))
+    
+    # Update layout
+    fig.update_layout(
+        title='Average and Median Price over Age',
+        xaxis=dict(title='Age'),
+        yaxis=dict(title='Price'),
+        xaxis_tickangle=-45,
+        hovermode='closest',
+        template='plotly_white'
+    )
+    mm_price = fig.to_json()
+
+    return render_template('Understand the Market.html', cars_man_json=cars_man_json, price_dis_json=price_dis_json, price_inf_json=price_inf_json, mm_price = mm_price)
 
 @app.route("/graphs/cars_by_country_map", methods=['GET'])
 def cars_by_country_map():
