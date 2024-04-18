@@ -538,9 +538,12 @@ iframe {
     // Parse the JSON data
     var carsManData = JSON.parse({{ cars_man_json | tojson }});
 
+    // Get the chart data from the JSON object
+    var chartData = carsManData['data']['data'][0];
+
     // Render the chart in the iframe
     var iframeDocument = document.createElement('iframe');
-    iframeDocument.srcdoc = carsManData['data'];
+    iframeDocument.srcdoc = chartData;
     iframeDocument.style.width = '100%';
     iframeDocument.style.height = '600px';
     iframeDocument.style.border = 'none';
