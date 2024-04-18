@@ -474,9 +474,9 @@ iframe {
           </table>
           
     </div>
-    <section class="graph11-container">
-        <div id="graph11" class="graph-iframe map"></div>
-    </section>
+       <div class="graph11-container">
+    <div id="graph11" class="graph-iframe map"></div>
+</div>
 </div>
 
 <div class="price-container">
@@ -531,9 +531,9 @@ iframe {
 
 <script>
 // Parse the JSON representation of the graph
-        var cars_man_json = {{ cars_man_json | tojson }};
+    var cars_man_json = {{ cars_man_json | tojson }};
 
-        // Render the graph using Plotly.js
-        Plotly.newPlot('graph11', JSON.parse(cars_man_json).data, JSON.parse(cars_man_json).layout);
+    // Render the graph using Plotly.js
+    Plotly.newPlot('graph11', JSON.parse(cars_man_json).data, JSON.parse(cars_man_json).layout);
 </body>
 </html>
