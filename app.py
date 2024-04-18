@@ -10,21 +10,17 @@ import numpy as np
 
 
 
+with open(r"Part 3 model building/Models/xgb_model.pkl", 'rb') as f:
+    xgb_model = pickle.load(f)
 
-
+df = pd.read_csv(r"EDA Data/EDA.csv")
+df.dropna(inplace=True)
 
 app = Flask(__name__)
-
-
-
 
 @app.route('/')
 def index():
     return render_template('index.html')
-
-
-with open(r"Part 3 model building/Models/xgb_model.pkl", 'rb') as f:
-    xgb_model = pickle.load(f)
 
 @app.route('/prediction', methods=['GET', 'POST'])
 def prediction():
@@ -93,11 +89,6 @@ def understand_the_market():
 @app.route("/graphs/cars_by_country_map", methods=['GET'])
 def cars_by_country_map():
     return render_template('/graphs/cars_by_country_map.html')
-
-
-
-df = pd.read_csv(r"EDA Data/EDA.csv")
-df.dropna(inplace=True)
 
 
 @app.route('/dashboard' )
