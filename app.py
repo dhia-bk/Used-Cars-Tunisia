@@ -19,16 +19,16 @@ catboost_model = CatBoostRegressor()
 catboost_model.load_model(r"Part 3 model building/Models/catboost_model.cbm")
 
 
-with open(r"/Part 3 model building/Models/xgb_model.pkl", 'rb') as f:
+with open(r"Part 3 model building/Models/xgb_model.pkl", 'rb') as f:
     xgb_model = pickle.load(f)
 
-with open(r"/Part 3 model building/Models/lgb_model.pkl", 'rb') as f:
+with open(r"Part 3 model building/Models/lgb_model.pkl", 'rb') as f:
     lgb_model = pickle.load(f)
 
-mlp_model = load(r"/Part 3 model building/Models/mlp_model.pkl")
+mlp_model = load(r"Part 3 model building/Models/mlp_model.pkl")
 
 
-meta_model = load(r"/Part 3 model building/Models/meta_model.pkl")
+meta_model = load(r"Part 3 model building/Models/meta_model.pkl")
 
 
 @app.route('/')
@@ -39,7 +39,7 @@ def index():
 def prediction():
     if request.method == 'POST':
 
-        df_model = pd.read_csv(r"/Part 3 model building/Model_Data/df_model.csv")
+        df_model = pd.read_csv(r"Part 3 model building/Model_Data/df_model.csv")
 
         categorical_cols = ['Fuel','Transmission','Manufacturer' , 'Model']
         numerical_cols = ['Age','Mileage','Horse Power']
@@ -127,7 +127,7 @@ def fig_avg_price_fuel():
 def fig_avg_price_transmission():
     return render_template('/graphs/fig_avg_price_transmission.html')
 
-df = pd.read_csv(r"/Part 4 deployment/EDA Data/EDA.csv")
+df = pd.read_csv(r"Part 4 deployment/EDA Data/EDA.csv")
 
 df.dropna(inplace=True)
 
