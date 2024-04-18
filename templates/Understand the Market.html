@@ -536,29 +536,21 @@ iframe {
 
 </div>
     <script>
-    // Parse the JSON data
+   // Parse the JSON data
     var carsManData = JSON.parse({{ cars_man_json | tojson }});
 
-    // Get the chart data from the JSON object
-    var chartData = carsManData['data'];
+    // Get the HTML content of the Plotly chart
+    var chartHtml = carsManData['data'];
 
-    // Check if chart data exists and is not empty
-    if (chartData && chartData.length > 0) {
-        // Get the HTML string representation of the chart data
-        var chartHtml = chartData[0];
+    // Render the chart in the iframe
+    var iframeDocument = document.createElement('iframe');
+    iframeDocument.srcdoc = chartHtml;
+    iframeDocument.style.width = '100%';
+    iframeDocument.style.height = '600px';
+    iframeDocument.style.border = 'none';
 
-        // Render the chart in the iframe
-        var iframeDocument = document.createElement('iframe');
-        iframeDocument.srcdoc = chartHtml;
-        iframeDocument.style.width = '100%';
-        iframeDocument.style.height = '600px';
-        iframeDocument.style.border = 'none';
-
-        // Append the iframe to the placeholder
-        document.getElementById('graph-placeholder').appendChild(iframeDocument);
-    } else {
-        console.error('No chart data found.');
-    }
+    // Append the iframe to the placeholder
+    document.getElementById('graph-placeholder').appendChild(iframeDocument);
 </script>
 </body>
 </html>
