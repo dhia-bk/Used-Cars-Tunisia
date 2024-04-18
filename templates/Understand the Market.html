@@ -418,7 +418,7 @@ iframe {
 <!-- Map Container -->
 <div class="map-container" >
     <section class="graph-container">
-        <iframe class="graph-iframe map" id="mapFrame"></iframe>
+        <div id="map" ></div>
     </section>
     <div class="text">
         <h1>Where do the Cars in the Tunisian Market come from?</h1>
@@ -537,12 +537,29 @@ iframe {
 </div>
 
 <script>
-    // Get the map JSON data passed from Flask
-    var map_json = {{ map_json|tojson|safe }};
+   // Get the map JSON data passed from Flask
+    var map_json = {{ map_json|safe }};
 
-    // Set the iframe source to display the map
-    var mapFrame = document.getElementById('mapFrame');
-    mapFrame.src = "data:text/html;charset=utf-8," + escape(map_json);
+    // Parse the JSON data
+    var map_data = JSON.parse(map_json);
+
+    // Create a new map instance
+    var map = L.map('map').setView([0, 0], 2);
+
+    // Add the OpenStreetMap tiles as the base layer
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Add the choropleth layer to the map
+    var choroplethLayer = L.geoJSON(map_data, {
+        style: function (feature) {
+            return {color: 'green'};
+        }
+    }).addTo(map);
+
+    // Fit the map bounds to the choropleth layer
+    map.fitBounds(choroplethLayer.getBounds());
 </script>
 </body>
 </html>
