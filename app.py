@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 
 import plotly.graph_objs as go
-
+import plotly.io as pio
 
 import pickle
 
@@ -67,8 +67,28 @@ def prediction():
     
 @app.route("/Understand the Market", methods=['GET'])
 def understand_the_market():
+    manufacturer_counts = df['Manufacturer'].value_counts().sort_values(ascending=False).head(20)
+    
+    cars_man = go.Figure(data=[
+        go.Bar(
+            x=manufacturer_counts.index,
+            y=manufacturer_counts.values,
+            marker_color=manufacturer_counts.values,
+            marker=dict(colorscale='Viridis'),
+        )
+    ])
+    
+    cars_man.update_layout(
+        title='Top 20 Car Manufacturers Listed for Sale',
+        xaxis=dict(title='Manufacturer'),
+        yaxis=dict(title='Count'),
+        xaxis_tickangle=-45,
+        bargap=0.1,
+        title_x=0.5,
+    )
+    cars_man_json = cars_man.to_json()
 
-    return render_template('Understand the Market.html')
+    return render_template('Understand the Market.html', cars_man_json=cars_man_json)
 
 @app.route("/graphs/cars_by_country_map", methods=['GET'])
 def cars_by_country_map():
