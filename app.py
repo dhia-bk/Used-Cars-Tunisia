@@ -25,7 +25,6 @@ with open(r"Part 3 model building/Models/xgb_model.pkl", 'rb') as f:
 with open(r"Part 3 model building/Models/lgb_model.pkl", 'rb') as f:
     lgb_model = pickle.load(f)
 
-mlp_model = load(r"Part 3 model building/Models/mlp_model.pkl")
 
 
 meta_model = load(r"Part 3 model building/Models/meta_model.pkl")
