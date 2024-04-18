@@ -126,7 +126,7 @@ def fig_avg_price_fuel():
 def fig_avg_price_transmission():
     return render_template('/graphs/fig_avg_price_transmission.html')
 
-df = pd.read_csv(r"Part 4 deployment/EDA Data/EDA.csv")
+df = pd.read_csv(r"EDA Data/EDA.csv")
 
 df.dropna(inplace=True)
 
