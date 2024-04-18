@@ -16,19 +16,19 @@ app = Flask(__name__)
 
 
 catboost_model = CatBoostRegressor()
-catboost_model.load_model(r"\Part 3 model building\Models\catboost_model.cbm")
+catboost_model.load_model(r"Part 3 model building/Models/catboost_model.cbm")
 
 
-with open(r"\Part 3 model building\Models\xgb_model.pkl", 'rb') as f:
+with open(r"/Part 3 model building/Models/xgb_model.pkl", 'rb') as f:
     xgb_model = pickle.load(f)
 
-with open(r"\Part 3 model building\Models\lgb_model.pkl", 'rb') as f:
+with open(r"/Part 3 model building/Models/lgb_model.pkl", 'rb') as f:
     lgb_model = pickle.load(f)
 
-mlp_model = load(r"\Part 3 model building\Models\mlp_model.pkl")
+mlp_model = load(r"/Part 3 model building/Models/mlp_model.pkl")
 
 
-meta_model = load(r"\Part 3 model building\Models\meta_model.pkl")
+meta_model = load(r"/Part 3 model building/Models/meta_model.pkl")
 
 
 @app.route('/')
@@ -39,7 +39,7 @@ def index():
 def prediction():
     if request.method == 'POST':
 
-        df_model = pd.read_csv(r"\Part 3 model building\Model_Data\df_model.csv")
+        df_model = pd.read_csv(r"/Part 3 model building/Model_Data/df_model.csv")
 
         categorical_cols = ['Fuel','Transmission','Manufacturer' , 'Model']
         numerical_cols = ['Age','Mileage','Horse Power']
@@ -74,18 +74,12 @@ def prediction():
         predicted_price_cat = catboost_model.predict(X.head(1))
 
 
-        df_categorical = pd.get_dummies(X[categorical_cols], drop_first=True)
-        X_mlp = pd.concat([X[numerical_cols], df_categorical], axis=1)
-        scaler = StandardScaler()
-        X_mlp[numerical_cols] = scaler.fit_transform(X_mlp[numerical_cols])
-        predicted_price_mlp = mlp_model.predict(X_mlp.head(1))
-
-        X_meta = np.column_stack((predicted_price_xgb,predicted_price_lgb,predicted_price_cat,predicted_price_mlp))
+        X_meta = np.column_stack((predicted_price_xgb,predicted_price_lgb,predicted_price_cat,))
         predicted_price = meta_model.predict(X_meta)
         
 
         
-        return render_template('prediction.html', prediction_text=f'Predicted Price: TND {predicted_price}')
+        return render_template('prediction.html', prediction_text=f'Predicted Price: TND {"the model is too large to load!"}')
     else:
         return render_template('prediction.html')
     
@@ -133,7 +127,7 @@ def fig_avg_price_fuel():
 def fig_avg_price_transmission():
     return render_template('/graphs/fig_avg_price_transmission.html')
 
-df = pd.read_csv(r"\Part 4 deployment\EDA Data\EDA.csv")
+df = pd.read_csv(r"/Part 4 deployment/EDA Data/EDA.csv")
 
 df.dropna(inplace=True)
 
