@@ -1,8 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 
 import plotly.graph_objs as go
-import folium
-from folium.plugins import MarkerCluster
+
 
 import pickle
 
@@ -16,13 +15,16 @@ import numpy as np
 
 app = Flask(__name__)
 
-with open(r"Part 3 model building/Models/xgb_model.pkl", 'rb') as f:
-    xgb_model = pickle.load(f)
+
 
 
 @app.route('/')
 def index():
     return render_template('index.html')
+
+
+with open(r"Part 3 model building/Models/xgb_model.pkl", 'rb') as f:
+    xgb_model = pickle.load(f)
 
 @app.route('/prediction', methods=['GET', 'POST'])
 def prediction():
@@ -60,8 +62,8 @@ def prediction():
         predicted_price_xgb = xgb_model.predict(X.head(1))
         
         return render_template('prediction.html', prediction_text=f'Predicted Price: TND {predicted_price_xgb}')
-    else:
-        return render_template('prediction.html')
+  
+    return render_template('prediction.html')
     
 @app.route("/Understand the Market", methods=['GET'])
 def understand_the_market():
@@ -75,15 +77,12 @@ def cars_by_country_map():
 
 
 df = pd.read_csv(r"EDA Data/EDA.csv")
-
 df.dropna(inplace=True)
 
 
 @app.route('/dashboard' )
 def graphs():
     return render_template('dashboard.html')  
-
-
 
 
 @app.route('/update_graphs', methods=['POST'])
