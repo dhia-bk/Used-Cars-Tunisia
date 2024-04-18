@@ -148,7 +148,7 @@ def understand_the_market():
         xaxis_title='Posting Date',
         yaxis_title='Percent Change / Inflation Rate (%)',
         template='plotly_white',
-        legend=dict(x=0.02, y=0.95),  n
+        legend=dict(x=0.02, y=0.95),  
          
     )
 
