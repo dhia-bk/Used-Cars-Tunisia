@@ -63,6 +63,8 @@ def prediction():
     
 @app.route("/Understand the Market", methods=['GET'])
 def understand_the_market():
+    df = pd.read_csv(r"EDA Data/EDA.csv")
+    df.dropna(inplace=True)
     manufacturer_counts = df['Manufacturer'].value_counts().sort_values(ascending=False).head(20)
     
     cars_man = go.Figure(data=[
