@@ -32,11 +32,9 @@ async def get_hrefs(url, session, max_retries=5):
 
     for attempt in range(max_retries):
         try:
-            # Creating Chrome driver with specified options
             driver = webdriver.Chrome(options=options)
             driver.get(url)
 
-            # Using WebDriverWait to explicitly wait for the presence of the needed el_-grgbvcxwu    ement
             wait = WebDriverWait(driver, 10)
             element_one = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, '#__next > div.flex.flex-col.xl\:flex-row.h-fit.w-full.overflow-x-hidden.mt-\[14rem\].mt-\[14rem\].lg\:mt-\[9rem\] > main > div.mt-3.mx-2.lg\:ml-0.lg\:mr-6.lg\:mt-12.relative.z-10 > div.relative.-z-40 > div:nth-child(2) > div')))
             all_links = wait.until(EC.presence_of_all_elements_located((By.TAG_NAME, 'article')))                 
@@ -50,7 +48,6 @@ async def get_hrefs(url, session, max_retries=5):
                 await asyncio.sleep(1)
 
 
-# Function to scrape Tayara website asynchronously
 async def scrape_tayara(url, session, max_retries=5):
     """
     Asynchronously scrapes car information from Tayara website.
@@ -65,38 +62,29 @@ async def scrape_tayara(url, session, max_retries=5):
     """
     for attempt in range(max_retries):
         try:
-            # List to store data for the current car
             car = []
             
-            # Fetching HTML content using aiohttp
             async with session.get(url) as response:
                 response.raise_for_status()
                 html_content = await response.text()
                 
-                # Parsing HTML using BeautifulSoup
                 soup1 = BeautifulSoup(html_content, "html.parser")
                 soup2 = BeautifulSoup(soup1.prettify(), 'html.parser')
                 
-                # Extracting car title
                 title = soup2.find('h1', {'class': 'text-gray-700 font-bold text-2xl font-arabic'}).text.strip()
                 car.append(title)
                 
-                # Extracting car price 
                 price = soup2.select_one('#__next > div.flex.flex-col.xl\:flex-row.h-fit.w-full.overflow-x-hidden.mt-\[14rem\].mt-\[14rem\].lg\:mt-\[9rem\] > main > div.grid.grid-cols-12.gap-x-2.mt-6.pr-0 > div > div:nth-child(2) > div.mt-4 > data').get('value')
                
                 car.append(price)
 
-                # Extracting location and date added information
                 place_and_date_added = soup2.find('div', {'class', 'flex justify-between items-center mt-5 mb-8'}).find('div', {'class': 'flex items-center space-x-2 mb-1'}).find('span').text.replace('\n', '').strip()
 
-                # Appending title, price, and location/date information to the car list
                 
                 car.append(place_and_date_added)
                 
-                # Extracting additional car details
                 data = {x.find('span', {'class': 'text-gray-600/80 text-2xs md:text-xs lg:text-xs font-medium'}).text.strip(): x.find('span', {'class': 'text-gray-700/80 text-xs md:text-sm lg:text-sm font-semibold'}).text.strip() for x in [x.find('div', {'class': 'px-4 py-2 bg-gray-100/70 flex items-center rounded-md border border-gray-300/80'}).find('span', {'class': 'flex flex-col py-1'}) for x in soup2.find('ul', {'class': 'grid gap-3 grid-cols-12'}).find_all('li', {'class': 'col-span-6 lg:col-span-3'})]}
 
-                # Inserting additional details into the car list at the appropriate positions
                 for i,j in data.items():
                     if i in tayara_data[0]:
                         car.insert( tayara_data[0].index(i),j)
