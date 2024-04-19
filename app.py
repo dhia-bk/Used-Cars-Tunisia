@@ -1,14 +1,14 @@
 from flask import Flask, render_template, request, jsonify
 
+import pandas as pd
+import numpy as np
+
 import plotly.graph_objs as go
 import plotly.io as pio
 import plotly.express as px
 from plotly.subplots import make_subplots
 
 import pickle
-
-import pandas as pd
-import numpy as np
 
 
 
