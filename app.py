@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, jsonify
 import plotly.graph_objs as go
 import plotly.io as pio
 import plotly.express as px
+from plotly.subplots import make_subplots
 
 import pickle
 
@@ -148,7 +149,9 @@ def understand_the_market():
         xaxis_title='Posting Date',
         yaxis_title='Percent Change / Inflation Rate (%)',
         template='plotly_white',
-        legend=dict(x=0.02, y=0.95),  
+        legend=dict(x=0.02, y=0.95), 
+         title_font_size=24,
+        title_x=0.5, 
          
     )
 
@@ -165,8 +168,8 @@ def understand_the_market():
         x=grouped_data['Age'],
         y=grouped_data['Price'],
         mode='lines+markers',
-        marker=dict(color='blue', size=8),
-        line=dict(color='blue', width=2),
+        marker=dict(color='red', size=8),
+        line=dict(color='red', width=2),
         name='Mean Price'
     ))
     
@@ -174,8 +177,8 @@ def understand_the_market():
         x=median_price['Age'],
         y=median_price['Price'],
         mode='lines+markers',
-        marker=dict(color='red', size=8),
-        line=dict(color='red', width=2),
+        marker=dict(color='blue', size=8),
+        line=dict(color='blue', width=2),
         name='Median Price'
     ))
     
@@ -186,11 +189,43 @@ def understand_the_market():
         yaxis=dict(title='Price'),
         xaxis_tickangle=-45,
         hovermode='closest',
-        template='plotly_white'
+        template='plotly_white',
+         title_font_size=24,
+        title_x=0.5, 
     )
     mm_price = fig.to_json()
 
-    return render_template('Understand the Market.html', cars_man_json=cars_man_json, price_dis_json=price_dis_json, price_inf_json=price_inf_json, mm_price = mm_price)
+    fig = make_subplots(rows=1, cols=2, subplot_titles=("Distribution of Mileage", "Distribution of Price"))
+    
+    # Define layout for the subplots
+    subplot_layout = {
+        'xaxis': dict(title='Mileage', titlefont=dict(size=16), tickfont=dict(size=14)),
+        'yaxis': dict(title='Frequency', titlefont=dict(size=16), tickfont=dict(size=14)),
+        'bargap': 0.05,
+        'plot_bgcolor': 'rgba(255, 255, 255, 0.7)',
+        'paper_bgcolor': 'rgba(255, 255, 255, 0.7)',
+        'title_font_size': 24,
+        'title_x': 0.5
+    }
+    
+    # Add histogram for mileage to subplot 1
+    fig.add_trace(
+        px.histogram(df, x='Mileage', nbins=20, color_discrete_sequence=['orange']).data[0],
+        row=1, col=1
+    )
+    
+    # Add histogram for price to subplot 2
+    fig.add_trace(
+        px.histogram(df, x='Price', nbins=20, color_discrete_sequence=['blue']).data[0],
+        row=1, col=2
+    )
+    
+    # Update subplot layout
+    fig.update_layout(subplot_layout)
+
+    pm = fig.to_json()
+
+    return render_template('Understand the Market.html', cars_man_json=cars_man_json, price_dis_json=price_dis_json, price_inf_json=price_inf_json, mm_price = mm_price, pm = pm)
 
 @app.route("/graphs/cars_by_country_map", methods=['GET'])
 def cars_by_country_map():
