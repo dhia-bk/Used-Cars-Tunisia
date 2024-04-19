@@ -139,7 +139,6 @@ async def main():
         tasks = [get_automobile_urls(link, session) for link in automobile_urls]
         await asyncio.gather(*tasks)
 
-    print(f'{len(automobile_cars_urls)} car listings are ready to be scraped from automobile.tn.\nFailed to access {len(automobile_urls)} URLs.')
 
     
     async with aiohttp.ClientSession() as session:
