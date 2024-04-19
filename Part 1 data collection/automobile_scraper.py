@@ -22,7 +22,6 @@ manufacturers_list = ['Alfa Romeo', 'Audi', 'BAIC', 'YX', 'BMW', 'BYD', 'Chery',
 # Base URL for automobile listings
 base_url = 'https://www.automobile.tn/fr/occasion/'
 
-# Generating URLs for the first 400 pages of listings
 automobile_urls = [f"{base_url}{i}" for i in range(1, 135)]
 
 # List to store individual car listing URLs
