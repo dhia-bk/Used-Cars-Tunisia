@@ -110,7 +110,7 @@ def understand_the_market():
         yaxis_title='Price',
         hovermode='x',
         template='plotly_white',
-        title_font_size=24,
+        title_font_size=20,
         title_x=0.5,  # Title centered
     )
     
@@ -190,7 +190,7 @@ def understand_the_market():
         xaxis_tickangle=-45,
         hovermode='closest',
         template='plotly_white',
-         title_font_size=20,
+         title_font_size=25,
         title_x=0.5, 
     )
     mm_price = fig.to_json()
