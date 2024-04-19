@@ -6,7 +6,6 @@
     <title>Used Car Market in Tunisia</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
-    /* Reset CSS */
     * {
     margin: 0;
     padding: 0;
@@ -18,7 +17,6 @@
     background-color: #293742;
     }
 
-    /* Navbar Styles */
     .navbar {
     background-color: #293742;
     padding: 20px;
@@ -52,7 +50,6 @@
     color: #ffffff;
     }
 
-    /* Hero Section Styles */
     .hero {
     background-color: #15202b;
     color: #ffffff;
@@ -75,15 +72,14 @@
 
 
 
-    /* Why Us Section Styles */
     .why-us {
-    background-color: #f5f5f5; /* Light grey background color */
+    background-color: #f5f5f5; 
     color: #15202b;
     padding: 190px 20px;
     text-align: center;
-    position: relative; /* Needed for positioning the background image and gradient */
-    overflow: hidden; /* Ensure the background image doesn't overflow */
-    margin-top: 20px; /* Increase margin for better separation */
+    position: relative; 
+    overflow: hidden; 
+    margin-top: 20px; 
     }
 
     .why-us::before {
@@ -93,20 +89,20 @@
     right: 0;
     bottom: 0;
     left: 0;
-    background-image: linear-gradient(to right, #f5f5f5, rgba(245, 245, 245, 0)); /* Linear gradient fading to the right */
-    z-index: 1; /* Ensure the gradient is below the text */
+    background-image: linear-gradient(to right, #f5f5f5, rgba(245, 245, 245, 0)); 
+    z-index: 1; 
     }
 
     .why-us .background-image {
     position: absolute;
     top: 0;
-    left: 0; /* Adjusted to start from the left */
+    left: 0; 
     bottom: 0;
-    width: 100%; /* Adjust the width of the background image to cover the entire section */
-    height: 100%; /* Ensure the background image covers the entire section */
-    object-fit: cover; /* Maintain aspect ratio while covering the entire section */
-    opacity: 0.5; /* Adjust the opacity of the image as needed */
-    z-index: 0; /* Ensure the image is below the text and gradient */
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    opacity: 0.5;
+    z-index: 0; 
     }
 
     .why-us .container {
@@ -115,25 +111,25 @@
     }
 
     .why-us h2 {
-        margin-bottom: 40px; /* Increased margin-bottom to add more space */
+        margin-bottom: 40px;
     }
 
     /* Service Section Styles */
     .services {
-    padding: 100px 20px; /* Increased padding for better separation */
-    background-color: #ffffff; /* White background color */
+    padding: 100px 20px; 
+    background-color: #ffffff; 
     }
 
     .services-title {
         text-align: center;
-        color: #0c253e; /* Changed title color to something darker */
-        margin-bottom: 90px; /* Increased margin for better separation */
+        color: #0c253e; 
+        margin-bottom: 90px; 
     }
 
     .service {
         display: flex;
         align-items: center;
-        margin-bottom: 20px; /* Increased margin for better separation */
+        margin-bottom: 20px; 
     }
 
     .service-content {
@@ -142,23 +138,23 @@
         border-radius: 10px;
         background-color: #f9f9f9;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        display: flex; /* Added to align content in flex direction */
+        display: flex; 
     }
 
     .service-image {
-        flex: 1; /* Added to control image size */
+        flex: 1; 
         text-align: center;
     }
 
     .service-text {
-        flex: 1; /* Added to control text size */
-        padding-left: 20px; /* Added padding to separate image and text */
+        flex: 1; 
+        padding-left: 20px; 
     }
 
     .service img {
         width: 100%;
         max-width: 400px;
-        height: auto; /* Maintain aspect ratio */
+        height: auto; 
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         transition: transform 0.3s ease;
@@ -181,7 +177,6 @@
 
 
 
-    /* Button Styles */
     .button {
     display: inline-block;
     background-color: #1da1f2;
@@ -191,7 +186,7 @@
     text-decoration: none;
     font-size: 18px;
     transition: background-color 0.3s ease;
-    cursor: pointer; /* Add cursor pointer for better usability */
+    cursor: pointer; 
     }
 
 
@@ -204,7 +199,6 @@
 
 
 
-    /* Our Process Section Styles */
     .process {
     padding: 100px 20px;
     text-align: center;
@@ -220,17 +214,17 @@
     .sources {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px; /* Added gap between source items */
+    gap: 20px; 
     }
 
     .source img {
-    width: 150px; /* Set a fixed width for all images */
-    height: 100px; /* Set a fixed height for all images */
-    margin: 0 auto; /* Center image horizontally */
+    width: 150px; 
+    height: 100px; 
+    margin: 0 auto; 
     }
 
     .source p {
-    margin-top: 10px; /* Added margin between image and text */
+    margin-top: 10px; 
     }
 
 
@@ -241,7 +235,6 @@
     </head>
     <body>
 
-    <!-- Navbar -->
     <nav class="navbar">
     <ul>
         <li><a href="#home">Home</a></li>
@@ -250,7 +243,6 @@
     </ul>
     </nav>
 
-    <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="container">
         <h1>Welcome to the Used Car Market in Tunisia</h1>
@@ -259,7 +251,6 @@
     </div>
     </section>
 
-    <!-- Why Choose Us Section -->
     <section class="why-us">
         <img class="background-image" src="https://i0.wp.com/bestsellingcarsblog.com/wp-content/uploads/2014/08/6.-Peugeot-203-Djerba-July-2014.jpg" alt="Background Image">
         <div class="container">
@@ -268,7 +259,6 @@
         </div>
     </section>
     
-    <!-- Services Section -->
     <section id="services" class="services">
         <div class="container">
             <h2 class="services-title">Our Services</h2>
@@ -299,7 +289,6 @@
         </div>
     </section>
 
-    <!-- Our Process Section -->
     <section id="process" class="process">
         <div class="container">
             <h2>Our Sources</h2>
