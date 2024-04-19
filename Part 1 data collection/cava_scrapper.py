@@ -38,26 +38,20 @@ async def scrape_data_cava(url, session, max_retries = 20):
                       html_content = await response.text()
                       sett = []
 
-                      # Parsing HTML content
                       soup1 = BeautifulSoup(html_content, "html.parser")
                       soup2 = BeautifulSoup(soup1.prettify(), 'html.parser')
                       
-                      #finding the first block that contains the first part of the data about the car listing
                       details_1 = soup2.find('div',{'class':'col-lg-4 col-md-4 col-sm-12 col-12 mt-2'})
 
-                      #locating and appending the title
                       title = details_1.find('h1',{'class':'p-title px-3 font-p-r pt-1'}).text.strip()
                       sett.append(title)
                     
-                      #locating and appending the price
                       price = details_1.find('div' , {'class' : 'price font-p-s-b'}).find('label').text
                       sett.append(price)
 
-                      #locating and appending the posting date
                       posting_date = details_1.find('div',{'class':'d-flex justify-content-between cv-publish-date-delivery'}).find('label', {'class': 'font-p-e-l cv-text-start'}).text.strip()
                       sett.append(posting_date)
                       
-                      #locating and appending the place 
                       place_tag = details_1.find('div',{'class':'cv-product-location mt-2 cv-info-icons cv-text-start ng-star-inserted'})
                       place=''
                       for a in place_tag.find_all('a') :
@@ -82,23 +76,18 @@ async def scrape_data_cava(url, session, max_retries = 20):
 
                       """
 
-                      #finding the second block that contains the second part of the data about the car listing
                       details_3 = soup2.find('div',{'class':'mb-3 ng-star-inserted'}).find_all('div',{'class':'product-specify mr-3 mt-2 pr-5 ng-star-inserted'})
 
-                      #creating an empty list that will contain the second part of the data scrapped from the car listing 
                       car_1 = []
 
-                      #looping through the elements in the second block that contains the second part of the information needed 
                       for div in details_3 :
 
-                        #finding and appending the characteristic and its value
                         span = div.find('span').text.strip()
                         car_1.append(span)
                         
                   
                         value = div.find('a',{'class':'font-p-m'}).text.strip()
                         car_1.append(value)
-                      #index_mapping and appending tha values with their correct index to car_1
                         
                       if (len(car_1)) == 18:
                           dict_1 = {car_1[i]: car_1[i + 1] for i in range(0, len(car_1), 2)}
@@ -126,7 +115,6 @@ async def scrape_data_cava(url, session, max_retries = 20):
 
                       
 
-                      # Finding the number of pictures posted in the listing
                       try:
                         nbr_pictures = soup2.select_one('body > app > div > div:nth-child(1) > div > app-product-details > div.container-full.bg-grey.mt-5 > div > div:nth-child(1) > div.col-lg-8.col-md-8.col-sm-12.col-12.mt-2 > div.p-1.bg-white.rounded.position-relative.cv-product-images.ng-star-inserted > div.menu-slider-container.d-flex.justify-content-center.align-items-center.py-2.ng-star-inserted')
                         nbr_pictures = len(nbr_pictures.find_all('img'))
@@ -136,7 +124,6 @@ async def scrape_data_cava(url, session, max_retries = 20):
                            
                            sett.append(0) 
 
-                      # Locating and appending the decription of the listing
                       try:
 
                         description =  soup2.select_one('body > app > div > div:nth-child(1) > div > app-product-details > div.container-full.bg-grey.mt-5 > div > div:nth-child(2) > div.col-lg-8.col-md-8.col-sm-12.col-12.mt-2 > div.product-specify.product-description.p-3.col-12.col-md-12.cv-text-start.mt-1 > p').text
@@ -146,7 +133,6 @@ async def scrape_data_cava(url, session, max_retries = 20):
                            
                            sett.append('')
 
-                      # Appending the information of the car to the data list  
                       cava_data_list.append(sett)
 
                       break 
@@ -172,11 +158,9 @@ async def main():
 
     driver.get(url)
 
-    # Setting up a WebDriverWait
     wait = WebDriverWait(driver, 10) 
 
 
-    # Locating the "show more" button and clicking it multiple times
 
 
     for i in range(550):
@@ -184,7 +168,6 @@ async def main():
             css_selector = "body > app > div > div:nth-child(1) > div > app-category-product > div > div > app-product-list > div.d-flex.justify-content-center.align-items-center.py-4.ng-star-inserted > button"
             button = driver.find_element(By.CSS_SELECTOR, css_selector)
 
-            # Scrolling to the top then back to where the button is then clicking it
             driver.execute_script("window.scrollTo(0, 0);")
             driver.execute_script("arguments[0].scrollIntoView(true);", button)
             button = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, css_selector)))
@@ -195,7 +178,6 @@ async def main():
         
     element_1 = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR,'body > app > div > div:nth-child(1) > div > app-category-product > div > div > app-product-list > div.cv-items-grid.py-4.ng-star-inserted')))
         
-    # updating the driver to get the final webpage   
     final_page_source = driver.page_source
     hrefs_cava = []
 
@@ -216,12 +198,9 @@ async def main():
             continue
     hrefs_cava = [f'https://www.cava.tn{car}'for car in hrefs_cava]
 
-    # Creating an asynchronous session
     async with aiohttp.ClientSession() as session:
-        # Creating a list of tasks for fetching and parsing URLs concurrently
         tasks = [scrape_data_cava(url, session) for url in hrefs_cava]
         await asyncio.gather(*tasks)
-    # Creating an asynchronous session
 
 
     cava_df = pd.DataFrame(cava_data_list[1:], columns=cava_data_list[0])
