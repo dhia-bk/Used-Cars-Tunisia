@@ -45,15 +45,12 @@ async def get_automobile_urls(url, session, max_retries=3):
                 response.raise_for_status()
                 html_content = await response.text()
 
-                # Creating BeautifulSoup object for parsing
                 soup1 = BeautifulSoup(html_content, "html.parser")
                 soup2 = BeautifulSoup(soup1.prettify(), 'html.parser')
 
-                # Extracting data-key attributes from div elements
                 articles = soup2.find_all('div', {'data-key': True})
                 data_keys = [div['data-key'] for div in articles]
 
-                # Extracting individual car listing URLs
                 for data_key in data_keys:
                     article = soup2.find('div', {'data-key': data_key})
                     href = article.find('a', {'class': 'occasion-link-overlay'}).get('href')
@@ -62,7 +59,7 @@ async def get_automobile_urls(url, session, max_retries=3):
                 automobile_urls.remove(url)
 
         except asyncio.TimeoutError:
-            await asyncio.sleep(2 ** attempt)   # an exponential delay before retrying
+            await asyncio.sleep(2 ** attempt)   
 
         except aiohttp.ClientError as e:
             await asyncio.sleep(2 ** attempt)   # an exponential delay before retrying
@@ -96,7 +93,6 @@ async def scrape_automobile(url, session, max_retries=5):
                 soup1 = BeautifulSoup(html_content, "html.parser")
                 soup2 = BeautifulSoup(soup1.prettify(), 'html.parser')
                 
-                # Extracting information from the first block
 
                 title = soup2.select_one('#content_container > div.occasion-details-v2 > h1').text.strip()
                 car.append(title)
@@ -139,9 +135,7 @@ async def main():
     Asynchronous main function to orchestrate the fetching and parsing of car listing URLs.
 
     """
-    # Creating an asynchronous session
     async with aiohttp.ClientSession() as session:
-        # Creating a list of tasks for fetching and parsing URLs concurrently
         tasks = [get_automobile_urls(link, session) for link in automobile_urls]
         await asyncio.gather(*tasks)
 
@@ -149,7 +143,6 @@ async def main():
 
     
     async with aiohttp.ClientSession() as session:
-        # Creating a list of tasks for fetching and parsing URLs concurrently
         tasks = [scrape_automobile(url, session) for url in automobile_cars_urls]
         await asyncio.gather(*tasks)
 
