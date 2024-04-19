@@ -225,7 +225,89 @@ def understand_the_market():
 
     pm = fig.to_json()
 
-    return render_template('Understand the Market.html', cars_man_json=cars_man_json, price_dis_json=price_dis_json, price_inf_json=price_inf_json, mm_price = mm_price, pm = pm)
+    fuel_counts = df.groupby('Fuel').size().reset_index(name='count')
+    
+    fig_fuel = go.Figure(go.Pie(
+        labels=fuel_counts['Fuel'],
+        values=fuel_counts['count'],
+        name='Fuel',
+        hole=0.4,
+        marker=dict(colors=['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd'], line=dict(color='#ffffff', width=2))
+    ))
+    fig_fuel.update_layout(
+        title_text='Fuel Distribution',
+        font=dict(family="Arial, sans-serif", size=14),
+        legend=dict(font=dict(family="Arial, sans-serif", size=12)),
+        title_font_size=24,
+        title_x=0.5,
+    )
+
+    fuel = fig_fuel.to_json()
+
+    transmission_counts = df.groupby('Transmission').size().reset_index(name='count')
+    
+    fig_transmission = go.Figure(go.Pie(
+        labels=transmission_counts['Transmission'],
+        values=transmission_counts['count'],
+        name='Transmission',
+        hole=0.4,
+        marker=dict(colors=['#1f77b4', '#ff7f0e', '#2ca02c'], line=dict(color='#ffffff', width=2))
+    ))
+    fig_transmission.update_layout(
+        title_text='Transmission Distribution',
+        font=dict(family="Arial, sans-serif", size=14),
+        legend=dict(font=dict(family="Arial, sans-serif", size=12)),
+        title_font_size=24,
+        title_x=0.5,
+    )
+
+    trans = fig_transmission.to_json()
+
+    avg_price_transmission = df.groupby('Transmission')['Price'].mean().reset_index()
+    
+    fig_avg_price_transmission = go.Figure(go.Bar(
+        x=avg_price_transmission['Transmission'],
+        y=avg_price_transmission['Price'],
+        marker=dict(color='#1f77b4'),
+        opacity=0.8
+    ))
+    fig_avg_price_transmission.update_layout(
+        title_text='Average Price per Transmission',
+        xaxis_title='Transmission',
+        yaxis_title='Average Price',
+        font=dict(family="Arial, sans-serif", size=14),
+        plot_bgcolor='rgba(255,255,255,0.9)',
+        paper_bgcolor='rgba(255,255,255,0.9)',
+        bargap=0.2,
+        title_font_size=24,
+        title_x=0.5,
+    )
+
+    trans_dis = fig_avg_price_transmission.to_json()
+
+    avg_price_fuel = df.groupby('Fuel')['Price'].mean().reset_index()
+    
+    fig_avg_price_fuel = go.Figure(go.Bar(
+        x=avg_price_fuel['Fuel'],
+        y=avg_price_fuel['Price'],
+        marker=dict(color='#ff7f0e'),
+        opacity=0.8
+    ))
+    fig_avg_price_fuel.update_layout(
+        title_text='Average Price per Fuel',
+        xaxis_title='Fuel',
+        yaxis_title='Average Price',
+        font=dict(family="Arial, sans-serif", size=14),
+        plot_bgcolor='rgba(255,255,255,0.9)',
+        paper_bgcolor='rgba(255,255,255,0.9)',
+        bargap=0.3,
+        title_font_size=24,
+        title_x=0.5,
+    )
+
+    fuel_dis = fig_avg_price_fuel.to_json()
+
+    return render_template('Understand the Market.html',fuel_dis = fuel_dis, cars_man_json=cars_man_json, price_dis_json=price_dis_json, price_inf_json=price_inf_json, mm_price = mm_price, pm = pm, fuel = fuel, trans = trans, trans_dis= trans_dis)
 
 @app.route("/graphs/cars_by_country_map", methods=['GET'])
 def cars_by_country_map():
