@@ -150,7 +150,7 @@ def understand_the_market():
         yaxis_title='Percent Change / Inflation Rate (%)',
         template='plotly_white',
         legend=dict(x=0.02, y=0.95), 
-         title_font_size=24,
+         title_font_size=20,
         title_x=0.5, 
          
     )
