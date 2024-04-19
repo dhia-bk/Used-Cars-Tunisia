@@ -525,12 +525,12 @@ iframe {
 <div class="transmission-fuel-container">
     <h1>Transmission and Fuel</h1>
     <div class="graph-row">
-        <iframe frameborder="1" width="45%" height="400px"></iframe>
-        <iframe  frameborder="1" width="45%" height="400px"></iframe>
+        <div  id = "graph6" frameborder="1" width="45%" height="400px"></div>
+        <div  id = "graph7"  frameborder="1" width="45%" height="400px"></div>
     </div>
     <div class="graph-row">
-        <iframe frameborder="1" width="45%" height="400px"></iframe>
-        <iframe frameborder="1" width="45%" height="400px"></iframe>
+        <div  id = "graph8" frameborder="1" width="45%" height="400px"></div>
+        <div  id = "graph9" frameborder="1" width="45%" height="400px"></div>
     </div>
 </div>
 <div class = "button_end">
@@ -554,6 +554,18 @@ iframe {
 
         var graphJSON5 = {{ pm | safe }};
         Plotly.newPlot('graph5', graphJSON5.data, graphJSON5.layout);
+
+        var graphJSON5 = {{ fuel | safe }};
+        Plotly.newPlot('graph6', graphJSON5.data, graphJSON5.layout);
+
+        var graphJSON5 = {{ trans | safe }};
+        Plotly.newPlot('graph7', graphJSON5.data, graphJSON5.layout);
+
+        var graphJSON5 = {{ fuel_dis | safe }};
+        Plotly.newPlot('graph8', graphJSON5.data, graphJSON5.layout);
+
+        var graphJSON5 = {{ trans_dis | safe }};
+        Plotly.newPlot('graph9', graphJSON5.data, graphJSON5.layout);
 
 
 </script>
