@@ -112,8 +112,8 @@ body {
     background-color: #ffffff; /* White background */
     border-radius: 10px; /* Rounded corners */
     padding: 20px; /* Add padding */
-    margin-right: 20px; /* Add margin to create space between graph-container and map-container */
-    position: relative; /* Position relative for absolute positioning */
+    margin-right: 20px; 
+    position: relative; 
     left : 100;
 }
 
@@ -517,7 +517,7 @@ iframe {
 <div class="price-mileage-container">
     <h1>What is the distribution of Price and Mileage?</h1>
     <div class="hello">
-        <iframe  frameborder="1" width="100%" height="100%"></iframe>
+        <div  id = "graph5" frameborder="1" width="100%" height="100%"></div>
     </div>
 </div>
 
@@ -548,8 +548,14 @@ iframe {
 
         var graphJSON3 = {{ price_inf_json | safe }};
         Plotly.newPlot('graph3', graphJSON3.data, graphJSON3.layout);
+        
         var graphJSON4 = {{ mm_price | safe }};
         Plotly.newPlot('graph4', graphJSON4.data, graphJSON4.layout);
+
+        var graphJSON5 = {{ pm | safe }};
+        Plotly.newPlot('graph5', graphJSON5.data, graphJSON5.layout);
+
+
 </script>
 </body>
 </html>
