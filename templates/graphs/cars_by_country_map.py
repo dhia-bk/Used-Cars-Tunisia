@@ -2,7 +2,7 @@ import pandas as pd
 import folium
 from folium.plugins import MarkerCluster
 
-def cars_by_country_map(df_path, JSON_path):
+def cars_by_country_map(df_path, JSON_file_path):
   df = pd.read_csv("path")
 
   country_counts = df['country_of_origin'].value_counts().to_dict()
@@ -75,5 +75,5 @@ def cars_by_country_map(df_path, JSON_path):
 
 
 df_path = r"EDA Data/EDA.csv"
-JSON_path = r"EDA Data/custom.geo.json"
-cars_by_country_map(df_path, JSON_path)
+JSON_file_path = r"EDA Data/custom.geo.json"
+cars_by_country_map(df_path, JSON_file_path)
