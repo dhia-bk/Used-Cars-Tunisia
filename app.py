@@ -59,7 +59,7 @@ def prediction():
 
         predicted_price_xgb = xgb_model.predict(X.head(1))
         
-        return render_template('prediction.html', prediction_text=f'Predicted Price: TND {predicted_price_xgb}')
+        return render_template('prediction.html', prediction_text=f'Predicted Price: TND {predicted_price_xgb[0]}')
   
     return render_template('prediction.html')
     
