@@ -58,8 +58,11 @@ def prediction():
         X[categorical_cols] = X[categorical_cols].astype('category')
 
         predicted_price_xgb = xgb_model.predict(X.head(1))
+        predicted_price_xgb = predicted_price_xgb[0]
+        predicted_price_xgb = round(predicted_price_xgb, -2)
+
         
-        return render_template('prediction.html', prediction_text=f'Predicted Price: TND {predicted_price_xgb[0]}')
+        return render_template('prediction.html', prediction_text=f'Predicted Price: TND {predicted_price_xgb}')
   
     return render_template('prediction.html')
     
