@@ -9,387 +9,119 @@
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <style>
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #ffffff; 
+  font-family: Arial, sans-serif;
+  background-color: #ffffff;
 }
 
 .navbar {
-    background-color: #293742;
-    color: #ffffff;
-    padding: 20px;
-    text-align: center;
+  background-color: #293742;
+  color: #ffffff;
+  padding: 20px;
+  text-align: center;
 }
 
 .navbar ul {
-    list-style: none;
+  list-style: none;
 }
 
 .navbar li {
-    display: inline-block;
-    margin: 0 10px;
+  display: inline-block;
+  margin: 0 10px;
 }
 
 .navbar a {
-    text-decoration: none;
-    color: #ffffff;
-    font-size: 18px;
-    padding: 10px 20px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 18px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .navbar a:hover {
-    background-color: #1da1f2;
+  background-color: #1da1f2;
 }
 
-
-
-
+/* Welcome Message Section */
 .welcome-message {
-    background-image: url('https://r4.wallpaperflare.com/wallpaper/616/403/742/mercedes-benz-amg-gt-s-2016-wallpaper-20094ef34b418dfa60a0479e98142bcd.jpg');
-    background-size: cover;
-    background-position: center;
-    padding: 20px;
-    margin: 20px;
-    border-radius: 5px;
-    text-align: center;
-    height: 600px;
-    color: white; 
-    font-family: 'Courier New', Courier, monospace; 
-    font-size: 18px; 
-    position: relative;
-    height : 750px;
+  background-image: url('https://r4.wallpaperflare.com/wallpaper/616/403/742/mercedes-benz-amg-gt-s-2016-wallpaper-20094ef34b418dfa60a0479e98142bcd.jpg');
+  background-size: cover;
+  background-position: center;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 5px;
+  text-align: center;
+  color: white;
+  font-family: 'Courier New', Courier, monospace;
 }
 
-.content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.welcome-message p {
+  margin-bottom: 20px;
 }
 
 .buttons {
-    position: absolute;
-    bottom: 5px;
-    left: 50%;
-    transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
-
 
 .explore-btn,
 .brand-btn {
-    background-color: #222; 
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 10px;
-    cursor: pointer;
-    border-radius: 5px;
+  background-color: #222;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 10px;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
 .explore-btn:hover,
 .brand-btn:hover {
-    background-color: #444; 
+  background-color: #444;
 }
 
-
-
-.graph-container {
-    width: 800px; 
-    height: 600px; 
-    background-color: #ffffff;
-    border-radius: 10px; 
-    padding: 20px; 
-    margin-right: 20px; 
-    position: relative; 
-    left : 100;
+/* Graph and Text Containers */
+.container {
+  padding: 20px;
 }
 
-.graph-container iframe {
-    position: absolute; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%;
+.text {
+  margin-top: 20px;
 }
 
-.map-container {
-    background-color: #f0f0f0;
-    padding: 20px;
-    margin: 20px;
-    border-radius: 10px; 
-    height: 650px; 
-    display: flex;
-    flex-direction: row; 
-    justify-content: space-between; 
-    align-items: center; 
-}
-
-
-.map-container .text {
-    font-family: 'Roboto', sans-serif;
-    flex: 1;
-    padding: 20px; 
-    display: fle
-    margin-bottom: 20px;x; 
-    flex-direction: column; 
-    justify-content: center; 
-    align-items: center; 
-    text-align: center; 
-}
-
-.map-container .text h1 {
-    font-size: 24px;
-    margin-bottom: 20px; 
-    color: #293742;
-    justify-content: center;
-    align-items: left;
-    text-align: left;
-}
-
-.map-container .text p {
-    font-size: 16px; 
-    line-height: 1.5;
-    color: #556e7b;
-    align-items: left;
-    text-align: left;
-    margin-bottom: 100px;
-}
-
-.continent-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 100px;
-}
-
-.continent-table th,
-.continent-table td {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-}
-
-.continent-table th {
-    background-color: #f2f2f2;
-    font-weight: bold;
-    text-align: left;
-}
-
-.continent-table td {
-    text-align: left;
-}
-
-.continent-table tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-.continent-table tr:hover {
-    background-color: #f2f2f2;
-}
-
-
-/* Footer Styles */
-.footer {
-background-color: #293742;
-color: #ffffff;
-padding: 20px;
-text-align: center;
-position: fixed;
-width: 100%;
-bottom: 0;
-z-index: 1000;
-}
-.graph1-container {
-    background-color: #f0f0f0;
-    padding: 20px;
-    margin: 20px;
-    border-radius: 10px;
-    height: 650px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.graph11-container {
-    width: 800px;
-    height: 600px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    padding: 20px;
-    position: relative;
-}
-
-.graph11-container iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.graph1-container .text {
-    font-family: 'Roboto', sans-serif;
-    flex: 1;
-    padding: 20px;
-    display: flex;
+/* Responsive Layout */
+@media only screen and (max-width: 768px) {
+  .buttons {
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    text-align: center;
+  }
 }
 
-.graph1-container .text h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #293742;
-    text-align: left;
-    margin-bottom: 100px;
-}
+@media only screen and (max-width: 480px) {
+  .navbar li {
+    display: block;
+    margin: 10px 0;
+  }
 
-.graph1-container .text p {
-    font-size: 16px;
-    line-height: 1.5;
-    color: #556e7b;
-    text-align: left;
-    margin-bottom: 50px;
-}
+  .welcome-message {
+    margin: 20px 0;
+    padding: 10px;
+  }
 
-
-
-.graph-container img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 80%;
-    height: 100%;
+  .buttons {
+    margin-top: 10px;
+  }
 }
-
-.price-mileage-container {
-    background-color: #f2f2f2; 
-    padding: 20px;
-    text-align: center; 
-}
-h1 {
-    margin-top: 0; 
-}
-.hello {
-    margin-top: 20px; 
-}
-iframe {
-    width: 100%;
-    height: 500px; 
-    border: 1px solid #ccc; 
-}
-
-.transmission-fuel-container {
-    background-color: #f2f2f2; 
-    padding: 20px;
-    text-align: center; 
-    margin-top: 20px; 
-}
-
-.transmission-fuel-container h1 {
-    margin-top: 0; 
-}
-
-.graph-row {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px; 
-}
-
-.transmission-fuel-container iframe {
-    border: 1px solid #ccc;
-    width: 40%; 
-    height: 300px;
-}
-
-.explore-btn a,
-.brand-btn a {
-    text-decoration: none; 
-    color: white; 
-}
-
-.button_end {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.end_button {
-    background-color: #222; 
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.end_button:hover {
-    background-color: #444; 
-}
-
-.button_end{background-color: #293742;
-}
-
-
-.price-container {
-    background-color: #f0f0f0; 
-    padding: 20px;
-    margin: 20px;
-    border-radius: 10px; 
-    height: 650px;
-    display: flex;
-    flex-direction: column; 
-    justify-content: space-between; 
-    align-items: center; 
-    height: 1000px;
-}
-
-.price_PD, .price_age {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    height: 50%; 
-}
-
-.price_PD div, .price_age div {
-    border: none;
-    width: 50%; 
-    height: 400px;
-}
-
-.price_PD div {
-    margin-right: 4%; 
-}
-
-.price_age div {
-    border: none;
-    width: 46%; 
-    height: 400px;
-}
-.price_age p {
-    margin-left: 10px;
-    margin-bottom: 50px;
-    width: 48%; 
-}
-
 </style>
 </head>
 <body>
