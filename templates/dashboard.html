@@ -222,14 +222,13 @@ h2 {
                         </div>
                         <div class="graph-container">
                             <div id="graph1" class="graph"></div>
+                            <div id="graph6" class="graph"></div>
+                            <div id="graph7" class="graph"></div>                            
                             <div id="graph2" class="graph"></div>
                             <div id="graph3" class="graph"></div>
-                            <div id="graph4" class="graph"></div>
-                            
-                            <div id="graph6" class="graph"></div>
-                            <div id="graph7" class="graph"></div>
+                            <div id="graph4" class="graph"></div>         
+
                         </div>
-                        <div id="graph5" class="graph"></div>
                     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -249,7 +248,6 @@ h2 {
             var graph2Div = document.getElementById('graph2');
             var graph3Div = document.getElementById('graph3');
             var graph4Div = document.getElementById('graph4');
-            var graph5Div = document.getElementById('graph5');
             var graph6Div = document.getElementById('graph6');
             var graph7Div = document.getElementById('graph7');
         
@@ -263,7 +261,6 @@ h2 {
             var graph2Div = document.getElementById('graph2');
             var graph3Div = document.getElementById('graph3');
             var graph4Div = document.getElementById('graph4');
-            var graph5Div = document.getElementById('graph5');
             var graph6Div = document.getElementById('graph6');
             var graph7Div = document.getElementById('graph7');
         
@@ -280,7 +277,6 @@ h2 {
                 Plotly.react(graph2Div, JSON.parse(data.graph2JSON), {});
                 Plotly.react(graph3Div, JSON.parse(data.graph3JSON), {});
                 Plotly.react(graph4Div, JSON.parse(data.graph4JSON), {});
-                Plotly.react(graph5Div, JSON.parse(data.graph5JSON), {});
                 Plotly.react(graph6Div, JSON.parse(data.graph6JSON), {});
                 Plotly.react(graph7Div, JSON.parse(data.graph7JSON), {});
         
