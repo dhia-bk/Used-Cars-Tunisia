@@ -5,138 +5,138 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive Dashboard</title>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <style>
+<style>
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+}
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f9f9f9;
-            color: #333;
-            line-height: 1.6;
-            margin: 0;
-        }
+nav.navbar {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+}
 
-        nav.navbar {
-            background-color: #333;
-            color: #fff;
-            padding: 1rem 0;
-            text-align: center;
-        }
+nav.navbar ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+}
 
-        nav.navbar ul {
-            list-style-type: none;
-            display: flex;
-            justify-content: center;
-            padding: 0;
-        }
+nav.navbar ul li {
+    margin-right: 1rem;
+}
 
-        nav.navbar ul li {
-            margin-right: 1rem;
-        }
+nav.navbar ul li a {
+    text-decoration: none;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
 
-        nav.navbar ul li a {
-            text-decoration: none;
-            color: #fff;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
+nav.navbar ul li a:hover {
+    background-color: #555;
+}
 
-        nav.navbar ul li a:hover {
-            background-color: #555;
-        }
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
+h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #333;
+}
 
-        h2 {
-            text-align: center;
-            margin-bottom: 2rem;
-            color: #333;
-        }
+.options-list {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
 
-        .options-list {
-            list-style-type: none;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-bottom: 2rem;
-        }
+.options-list li {
+    cursor: pointer;
+    margin: 0.5rem;
+    padding: 1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+}
 
-        .options-list li {
-            cursor: pointer;
-            margin: 0.5rem;
-            padding: 1rem;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            background-color: #fff;
-            display: flex;
-            align-items: center;
-        }
+.options-list li:hover {
+    background-color: #f4f4f4;
+}
 
-        .options-list li:hover {
-            background-color: #f4f4f4;
-        }
+.options-list li img {
+    margin-right: 1rem;
+    max-width: 30px;
+    height: auto;
+}
 
-        .options-list li img {
-            margin-right: 1rem;
-            max-width: 30px;
-            height: auto;
-        }
+.average-values {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+}
 
-        .average-values {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            padding: 1rem;
-            background-color: #f4f4f4;
-            border-radius: 10px;
-        }
+.average-box {
+    text-align: center;
+}
 
-        .average-box {
-            text-align: center;
-        }
+.average-box p {
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    color: #555;
+}
 
-        .average-box p {
-            margin-bottom: 0.5rem;
-            font-size: 1.2rem;
-            color: #555;
-        }
+.graph-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-gap: 0;
+}
 
-        .graph-container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            grid-gap: 2rem;
-        }
+.graph {
+    width: 100%;
+    height: 300px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
 
-        .graph {
-            width: 100%;
-            height: 400px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            background-color: #fff;
-        }
-        .options-list li.selected {
-            background-color: skyblue;
-        }
-        
+.options-list li.selected {
+    background-color: skyblue;
+}
 
-    </style>
+</style>
 </head>
 <body>
 
