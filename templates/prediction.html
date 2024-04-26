@@ -217,6 +217,34 @@
 
 </div>
 <script>
+   document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('prediction-form');
+    const requiredInputs = form.querySelectorAll('input[required], select[required]');
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent form submission
+
+        let formIsValid = true;
+
+        requiredInputs.forEach(function(input) {
+            if (!input.value.trim()) { // Check if input is empty
+                formIsValid = false;
+                input.classList.add('error'); // Add error class to empty input
+            } else {
+                input.classList.remove('error'); // Remove error class if input is filled
+            }
+        });
+
+        if (formIsValid) {
+            // If form is valid, submit the form
+            this.submit();
+        } else {
+            // If form is not valid, display an error message or handle it in any way you prefer
+            alert('Please fill in all required fields.');
+        }
+    });
+});
+
 
   // Function to update the models dropdown based on the selected manufacturer
         const manufacturerDropdown = document.getElementById('manufacturer');
@@ -294,35 +322,6 @@
         manufacturerDropdown.addEventListener('change', updateModels);
     
         updateModels();
-
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('prediction-form');
-    const requiredInputs = form.querySelectorAll('input[required], select[required]');
-
-    form.addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent form submission
-
-        let formIsValid = true;
-
-        requiredInputs.forEach(function(input) {
-            if (!input.value.trim()) { // Check if input is empty
-                formIsValid = false;
-                input.classList.add('error'); // Add error class to empty input
-            } else {
-                input.classList.remove('error'); // Remove error class if input is filled
-            }
-        });
-
-        if (formIsValid) {
-            // If form is valid, submit the form
-            this.submit();
-        } else {
-            // If form is not valid, display an error message or handle it in any way you prefer
-            alert('Please fill in all required fields.');
-        }
-    });
-});
-
 
 </script>
 
