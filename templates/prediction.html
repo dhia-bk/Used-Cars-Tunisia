@@ -115,7 +115,7 @@
 <form id="prediction-form",action = "/prediction", method = "post">
     <div class="form-group">
         <label for="manufacturer">Manufacturer:</label>
-        <select id="manufacturer" name="manufacturer">
+        <select id="manufacturer" name="manufacturer" required>
             <option value="HYUNDAI">HYUNDAI</option>
             <option value="FIAT">FIAT</option>
             <option value="MITSUBISHI">MITSUBISHI</option>
@@ -170,31 +170,31 @@
     </div>
     <div class="form-group">
         <label for="model">Model:</label>
-        <select id="model" name="model">
+        <select id="model" name="model" required>
         </select>
     </div>
     <div class="form-group">
         <label for="age">Age of the Car:</label>
-        <input type="number" id="age" name="age" min="0" max="45">
+        <input type="number" id="age" name="age" min="0" max="45" required>
     </div>
     <div class="form-group">
         <label for="mileage">Mileage (km):</label>
-        <input type="number" id="mileage" name="mileage" min="0" max="500000">
+        <input type="number" id="mileage" name="mileage" min="0" max="500000" required>
     </div>
     <div class="form-group">
         <label for="horsepower">Fiscal power:</label>
-        <input type="number" id="horsepower" name="horsepower" min="1" max="100">
+        <input type="number" id="horsepower" name="horsepower" min="1" max="100" required>
     </div>
     <div class="form-group">
         <label for="transmission">Transmission:</label>
-        <select id="transmission" name="transmission">
+        <select id="transmission" name="transmission" required>
             <option value="Manual">Manual</option>
             <option value="Automatic">Automatic</option>
         </select>
     </div>
     <div class="form-group">
         <label for="fuel">Fuel:</label>
-        <select id="fuel" name="fuel">
+        <select id="fuel" name="fuel" required>
             <option value="Gasoline">Gasoline</option>
             <option value="Diesel">Diesel</option>
             <option value="Hybrid">Hybrid</option>
@@ -217,35 +217,6 @@
 
 </div>
 <script>
-   document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('prediction-form');
-    const requiredInputs = form.querySelectorAll('input[required], select[required]');
-
-    form.addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent form submission
-
-        let formIsValid = true;
-
-        requiredInputs.forEach(function(input) {
-            if (!input.value.trim()) { // Check if input is empty
-                formIsValid = false;
-                input.classList.add('error'); // Add error class to empty input
-            } else {
-                input.classList.remove('error'); // Remove error class if input is filled
-            }
-        });
-
-        if (formIsValid) {
-            // If form is valid, submit the form
-            this.submit();
-        } else {
-            // If form is not valid, display an error message or handle it in any way you prefer
-            alert('Please fill in all required fields.');
-        }
-    });
-});
-
-
   // Function to update the models dropdown based on the selected manufacturer
         const manufacturerDropdown = document.getElementById('manufacturer');
         const modelDropdown = document.getElementById('model');
