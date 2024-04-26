@@ -7,7 +7,7 @@ import pandas as pd
 
 # List to store the scraped data
 automobile_data_list = [['Titre', 'Prix', 'Fabricant', 'Carrosserie', 'Energie',
-                         'Puissance fiscale', 'Boite', 'Transmission', 
+                         'Puissance fiscale', 'Boite', 'Transmission',  
                          'Kilometrage', 'Annee', 'Inserée le'
                            ]]
 
