@@ -37,7 +37,7 @@ def cars_by_country_map(df_path, JSON_file_path):
   
   # Choropleth layer to color countries based on count of cars
   choropleth = folium.Choropleth(
-      geo_data= JSON_path,
+      geo_data= JSON_file_path,
       name='choropleth',
       data=country_counts,
       key_on='feature.properties.name',
