@@ -25,7 +25,7 @@ def index():
     return render_template('index.html')
 
 @app.route('/zohoverify/verifyforzoho')
-def index():
+def inddex():
     return render_template('verifyforzoho.html')
 
 @app.route('/prediction', methods=['GET', 'POST'])
