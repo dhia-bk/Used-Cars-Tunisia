@@ -24,7 +24,7 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route('/zohoverify/verifyforzoho')
+@app.route('/zohoverify/verifyforzoho.html')
 def inddex():
     return render_template('verifyforzoho.html')
 
