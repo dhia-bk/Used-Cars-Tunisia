@@ -24,10 +24,6 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route('/zohoverify/verifyforzoho.html')
-def inddex():
-    return render_template('verifyforzoho.html')
-
 @app.route('/prediction', methods=['GET', 'POST'])
 def prediction():
     if request.method == 'POST':
